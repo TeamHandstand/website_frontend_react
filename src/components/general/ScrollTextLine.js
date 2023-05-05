@@ -48,6 +48,8 @@ export const ScrollTextLine = React.memo(props => {
     const element = textRef.current;
     if (isInViewport(textRef.current)) {
       setIsInView(true);
+    } else {
+      setIsInView(false);
     }
   };
 
@@ -56,14 +58,14 @@ export const ScrollTextLine = React.memo(props => {
       window?.pageYOffset || document?.documentElement?.scrollTop;
     if (currentScrollTop > scrollRef.current) {
       // scrolled down
-      const newWidth = Math.min(Number(widthRef.current + 1), 400);
+      const newWidth = Math.min(Number(widthRef.current + 10), 400);
       console.log("SCROLLED DOWN!", newWidth, widthRef.current);
       setWidthRef(newWidth);
     }
 
     if (currentScrollTop < scrollRef.current) {
       //   scrolled up
-      const newWidth = Math.max(0, Number(widthRef.current - 1));
+      const newWidth = Math.max(0, Number(widthRef.current - 10));
       console.log("SCROLLED UP!", newWidth, widthRef.current);
       setWidthRef(newWidth);
     }
@@ -82,7 +84,7 @@ export const ScrollTextLine = React.memo(props => {
     if (isInView) {
       addScrollListener();
     } else {
-      removeScrollListener();
+      //   removeScrollListener();
     }
   }, [isInView]);
 

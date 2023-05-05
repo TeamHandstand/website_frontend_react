@@ -4,10 +4,14 @@ import { ImageCardWithDescription } from "./ImageCardWithDescription";
 import { ImageCardWithScrollText } from "./ImageCardWithScrollText";
 const StyledContainer = styled.div`
   position: relative;
-  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
 `;
 const StyledLeftColumn = styled.div`
+  position: sticky;
+  top: 8px;
   width: 50%;
+  align-self: flex-start;
 `;
 const StyledRightColumn = styled.div`
   width: 50%;
@@ -17,6 +21,7 @@ const StyledRightColumn = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  height: 100%;
 `;
 
 export const StickyImageDisplay = React.memo(props => {
@@ -25,8 +30,8 @@ export const StickyImageDisplay = React.memo(props => {
     <StyledContainer>
       <StyledLeftColumn>
         <ImageCardWithScrollText
-          title={""}
-          imageUrl={""}
+          title={"What about this picture?"}
+          imageUrl={"https://picsum.photos/id/237/600/500"}
           linesOfDescription={[
             "Hello there how are you?",
             "I'm well, thanks for asking my friend",
