@@ -80,6 +80,12 @@ export const Home = React.memo(props => {
       description: "Here is a description of what's going on here. Fascinating."
     }
   ];
+
+  React.useEffect(() => {
+    console.log("HOME HAS MOUNTED");
+  }, []);
+
+  console.log("HOME HAS RENDERED");
   return (
     <StyledContainer>
       <Header />

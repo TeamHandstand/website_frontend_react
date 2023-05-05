@@ -10,7 +10,12 @@ const LogoContainer = styled.div`
   flex-grow: 1;
 `;
 export const LogoSelector = React.memo(props => {
-  const { testimonials, onLogoClick, selectedTestimonial } = props;
+  const {
+    testimonials,
+    onLogoClick,
+    selectedTestimonial,
+    animationTime
+  } = props;
 
   const handleLogoClick = testimonial => {
     onLogoClick(testimonial);
@@ -24,6 +29,7 @@ export const LogoSelector = React.memo(props => {
               isSelected={testimonial?.name === selectedTestimonial?.name}
               testimonial={testimonial}
               onLogoClick={() => handleLogoClick(testimonial)}
+              animationTime={animationTime}
             />
           </LogoContainer>
         );

@@ -1,8 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-const StyledContainer = styled.div``;
+const StyledContainer = styled.div`
+  width: 100%;
+`;
 const StyledTitle = styled.div``;
-const StyledImage = styled.img``;
+const StyledImage = styled.img`
+  width: 100%;
+`;
 const StyledImageWithTitle = styled.div``;
 const StyledDescription = styled.div``;
 export const ImageCardWithDescription = React.memo(props => {

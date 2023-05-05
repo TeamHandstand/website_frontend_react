@@ -58,15 +58,16 @@ export const ScrollTextLine = React.memo(props => {
       window?.pageYOffset || document?.documentElement?.scrollTop;
     if (currentScrollTop > scrollRef.current) {
       // scrolled down
-      const newWidth = Math.min(Number(widthRef.current + 10), 400);
-      console.log("SCROLLED DOWN!", newWidth, widthRef.current);
+      const newWidth = Math.min(
+        Number(widthRef.current + 10),
+        textRef?.current?.offsetWidth
+      );
       setWidthRef(newWidth);
     }
 
     if (currentScrollTop < scrollRef.current) {
       //   scrolled up
       const newWidth = Math.max(0, Number(widthRef.current - 10));
-      console.log("SCROLLED UP!", newWidth, widthRef.current);
       setWidthRef(newWidth);
     }
     setScrollRef(currentScrollTop);
