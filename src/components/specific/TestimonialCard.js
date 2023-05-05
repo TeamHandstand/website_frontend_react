@@ -3,9 +3,7 @@ import styled from "styled-components";
 import { Header } from "../text/Header";
 import { ScrollText } from "../general/ScrollText";
 import { TestimonialWidget } from "../general/TestimonialWidget";
-const StyledContainer = styled.div`
-  height: 800px;
-`;
+const StyledContainer = styled.div``;
 export const TestimonialCard = React.memo(props => {
   return (
     <StyledContainer>

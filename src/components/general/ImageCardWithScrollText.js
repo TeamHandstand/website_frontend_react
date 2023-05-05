@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { ScrollText } from "./ScrollText";
 const StyledContainer = styled.div`
   position: relative;
-  border: 1px solid red;
   border-radius: 16px;
   width: 100%;
 `;

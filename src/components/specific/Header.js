@@ -6,7 +6,6 @@ const StyledContainer = styled.div`
   left: 0;
   width: 100%;
   height: 30px;
-  border: 1px solid hotpink;
   transition: 0.1s;
   z-index: 100;
 `;
