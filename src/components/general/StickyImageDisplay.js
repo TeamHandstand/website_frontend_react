@@ -6,22 +6,16 @@ const StyledContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
+  margin-top: 18px;
 `;
 const StyledLeftColumn = styled.div`
   position: sticky;
-  top: 8px;
+  top: 30px;
   width: 50%;
   align-self: flex-start;
 `;
 const StyledRightColumn = styled.div`
   width: 50%;
-  -ms-overflow-style: none; /* for Internet Explorer, Edge */
-  scrollbar-width: none; /* for Firefox */
-  overflow-y: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  height: 100%;
 `;
 
 export const StickyImageDisplay = React.memo(props => {

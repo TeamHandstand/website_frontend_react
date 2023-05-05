@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { Header } from "./Header";
+import { Header } from "../text/Header";
 import { ScrollText } from "../general/ScrollText";
 import { TestimonialWidget } from "../general/TestimonialWidget";
-const StyledContainer = styled.div``;
+const StyledContainer = styled.div`
+  height: 800px;
+`;
 export const TestimonialCard = React.memo(props => {
   return (
     <StyledContainer>

@@ -10,6 +10,27 @@ const StyledImage = styled.div``;
 const StyledImageCaption = styled.div``;
 const StyledImageSubheader = styled.div``;
 export const TestimonialWidget = React.memo(props => {
+  const testimonials = [
+    {
+      order: "1",
+      name: "Google",
+      left_bubble_text: "1,200 people",
+      right_bubble_text: "In Person",
+      headline_text:
+        "Google trusts us to be the main event at their annual holiday party.",
+      gradient_color: "#4285F4",
+      logo_url: "somelogo.svg", // @Ben - different URLs for grayscale and white logos or no? svg vs png ?
+      background_image_url: "somebackground.jpg"
+    }
+  ];
+
+  const [selectedTestimonial, setSelectedTestimonial] = React.useState(
+    testimonials[0]
+  );
+  const handleLogoClick = testimonial => {
+    console.log("THIS LOGO WAS CLICKED", testimonial);
+    setSelectedTestimonial(testimonial);
+  };
   return (
     <StyledContainer>
       <StyledImageContainer>
@@ -22,7 +43,11 @@ export const TestimonialWidget = React.memo(props => {
         </StyledImageCaption>
       </StyledImageContainer>
       <StyledSelectionContainer>
-        <LogoSelector logos={[]} />
+        <LogoSelector
+          testimonials={testimonials}
+          onLogoClick={handleLogoClick}
+          selectedTestimonial={selectedTestimonial}
+        />
       </StyledSelectionContainer>
     </StyledContainer>
   );

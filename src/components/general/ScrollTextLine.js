@@ -19,7 +19,7 @@ const StyledMask = styled.div`
   color: black;
   top: 0;
   left: 0;
-  transition: 0.2s;
+  transition: 0.1s;
   z-index: 2;
   overflow: hidden;
 `;

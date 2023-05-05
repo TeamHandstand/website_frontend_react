@@ -8,7 +8,9 @@ import { TestimonialCard } from "../specific/TestimonialCard";
 import { CountCard } from "../specific/CountCard";
 import { Footer } from "../specific/Footer";
 
-const StyledContainer = styled.div``;
+const StyledContainer = styled.div`
+  background-color: lightgray;
+`;
 export const Home = React.memo(props => {
   const firstLinks = [
     {

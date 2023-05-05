@@ -3,15 +3,20 @@ import styled from "styled-components";
 import { LogoWithLoadingBar } from "./LogoWithLoadingBar";
 const StyledContainer = styled.div``;
 const LogoContainer = styled.div`
-  width: ${props => `100/${props?.logos?.length}%`};
+  width: ${props => `100/${props?.testimonials?.length}%`};
 `;
 export const LogoSelector = React.memo(props => {
-  const { logos, onLogoClick } = props;
+  const { testimonials, onLogoClick, selectedTestimonial } = props;
+
   return (
     <StyledContainer>
-      {logos.map(logo => {
+      {testimonials.map(testimonial => {
         <LogoContainer>
-          <LogoWithLoadingBar logo={logo} onLogoClick={onLogoClick} />
+          <LogoWithLoadingBar
+            isSelected={testimonial?.name === selectedTestimonial?.name}
+            logo={testimonial}
+            onLogoClick={onLogoClick}
+          />
         </LogoContainer>;
       })}
     </StyledContainer>
