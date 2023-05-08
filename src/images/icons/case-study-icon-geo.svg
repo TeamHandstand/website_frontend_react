@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="27px" height="31px" viewBox="0 0 27 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>case-study-icon-geo</title>
+    <defs>
+        <path d="M9.96293845,13.0186687 C8.58799532,13.0186687 7.47338369,11.9098811 7.47338369,10.5421223 C7.47338369,9.17436348 8.58799532,8.06557589 9.96293845,8.06557589 C11.3378816,8.06557589 12.4524932,9.17436348 12.4524932,10.5421223 C12.4481774,11.9080988 11.3360899,13.0143754 9.96293845,13.0186687 Z M17.4316027,10.7897769 C17.4316027,6.6865005 14.0877678,3.36013773 9.96293845,3.36013773 C5.83810906,3.36013773 2.49427416,6.6865005 2.49427416,10.7897769 C2.49427416,13.6873362 4.92093491,17.5259831 9.96293845,22.107594 C15.0036317,17.5259831 17.4316027,13.6873362 17.4316027,10.7897769 Z M9.96293845,0.635749151 C12.6526032,0.619438282 15.2332862,1.69211067 17.1115789,3.60730095 C18.9898717,5.52249124 20.0041389,8.11538897 19.9211575,10.7897769 C19.9211575,14.9008439 16.6017512,19.7713852 9.96293845,25.4014007 C3.32412575,19.7670404 0.00471939629,14.8964991 0.00471939629,10.7897769 C-0.0782619731,8.11538897 0.936005247,5.52249124 2.81429799,3.60730095 C4.69259073,1.69211067 7.27327372,0.619438282 9.96293845,0.635749151 L9.96293845,0.635749151 Z" id="path-1"></path>
+        <filter x="-25.1%" y="-16.2%" width="150.2%" height="140.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="1" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 1   0 0 0 0 1  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="✅-New-Home-Page" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="MacBook-Pro-14&quot;-Copy-6" transform="translate(-385.000000, -1981.000000)" fill-rule="nonzero">
+            <g id="Group-57" transform="translate(116.000000, 1156.000000)">
+                <g id="Group-52" transform="translate(10.000000, 393.000000)">
+                    <g id="Group-15" transform="translate(29.000000, 427.000000)">
+                        <g id="Group-49-Copy" transform="translate(197.271630, 0.000000)">
+                            <g id="case-study-icon-geo" transform="translate(36.054012, 6.409906)">
+                                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                                <use fill="#131415" xlink:href="#path-1"></use>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

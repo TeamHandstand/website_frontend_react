@@ -8,8 +8,31 @@ import { TestimonialCard } from "../specific/TestimonialCard";
 import { CountCard } from "../specific/CountCard";
 import { Footer } from "../specific/Footer";
 
+import HeroImage from "../../images/SampleBackground.png";
+import { HeroBackground } from "../general/HeroBackground";
+
 const StyledContainer = styled.div`
   background-color: lightgray;
+`;
+const StyledContentContainer = styled.div`
+  width: 100%;
+  background-color: transparent;
+  margin-top: 600px;
+  transform: translateY(0);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledBackgroundContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100vw;
+  height: 100vh;
 `;
 export const Home = React.memo(props => {
   const firstLinks = [
@@ -56,17 +79,17 @@ export const Home = React.memo(props => {
     },
     {
       imageUrl: "https://picsum.photos/id/239/600/400",
-      title: "Test Title 1",
+      title: "Test Title 15",
       description: "Here is a description of what's going on here. Fascinating."
     },
     {
       imageUrl: "https://picsum.photos/id/240/600/400",
-      title: "Test Title 1",
+      title: "Test Title 19",
       description: "Here is a description of what's going on here. Fascinating."
     },
     {
       imageUrl: "https://picsum.photos/id/241/600/400",
-      title: "Test Title 1",
+      title: "Test Title 12",
       description: "Here is a description of what's going on here. Fascinating."
     },
     {
@@ -89,12 +112,17 @@ export const Home = React.memo(props => {
   return (
     <StyledContainer>
       <Header />
-      <LinkList links={firstLinks} />
-      <TestimonialCard />
-      <StickyImageDisplay images={images} />
-      <CountCard />
-      <LinkList header={"How can we help?"} links={secondLinks} />
-      <Footer />
+      <StyledBackgroundContainer>
+        <HeroBackground imageUrl={HeroImage} fadeOnScroll />
+      </StyledBackgroundContainer>
+      <StyledContentContainer>
+        <LinkList links={firstLinks} />
+        <TestimonialCard />
+        <StickyImageDisplay images={images} />
+        <CountCard />
+        <LinkList header={"How can we help?"} links={secondLinks} />
+        <Footer />
+      </StyledContentContainer>
     </StyledContainer>
   );
 });

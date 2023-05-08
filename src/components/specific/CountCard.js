@@ -43,7 +43,7 @@ const StyledCountCard = styled.div`
   padding: 8px;
   background-color: white;
   color: black;
-  border-radius: 16px;
+  border-radius: 13px;
 `;
 export const CountCard = React.memo(props => {
   return (

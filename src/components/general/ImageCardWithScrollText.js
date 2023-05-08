@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ScrollText } from "./ScrollText";
 const StyledContainer = styled.div`
   position: relative;
-  border-radius: 16px;
+  border-radius: 13px;
   width: 100%;
 `;
 const StyledImage = styled.img`
