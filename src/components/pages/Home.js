@@ -80,32 +80,44 @@ export const Home = React.memo(props => {
     {
       imageUrl: "https://picsum.photos/id/238/600/400",
       title: "Test Title 1",
-      description: "Here is a description of what's going on here. Fascinating."
+      description:
+        "Here is a description of what's going on here. Fascinating.",
+      gradientColor: "blue"
     },
     {
       imageUrl: "https://picsum.photos/id/239/600/400",
       title: "Test Title 15",
-      description: "Here is a description of what's going on here. Fascinating."
+      description:
+        "Here is a description of what's going on here. Fascinating.",
+      gradientColor: "yellow"
     },
     {
       imageUrl: "https://picsum.photos/id/240/600/400",
       title: "Test Title 19",
-      description: "Here is a description of what's going on here. Fascinating."
+      description:
+        "Here is a description of what's going on here. Fascinating.",
+      gradientColor: "red"
     },
     {
       imageUrl: "https://picsum.photos/id/241/600/400",
       title: "Test Title 12",
-      description: "Here is a description of what's going on here. Fascinating."
+      description:
+        "Here is a description of what's going on here. Fascinating.",
+      gradientColor: "green"
     },
     {
       imageUrl: "https://picsum.photos/id/242/600/400",
       title: "Test Title 2",
-      description: "Here is a description of what's going on here. Fascinating."
+      description:
+        "Here is a description of what's going on here. Fascinating.",
+      gradientColor: "blue"
     },
     {
       imageUrl: "https://picsum.photos/id/243/600/400",
       title: "Test Title 3",
-      description: "Here is a description of what's going on here. Fascinating."
+      description:
+        "Here is a description of what's going on here. Fascinating.",
+      gradientColor: "yellow"
     }
   ];
 

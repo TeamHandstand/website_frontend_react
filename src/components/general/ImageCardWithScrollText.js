@@ -5,6 +5,12 @@ const StyledContainer = styled.div`
   position: relative;
   border-radius: 13px;
   width: 100%;
+  background-color: white;
+  padding: 60px 0px 30px 0px;
+`;
+const StyledImageContainer = styled.div`
+  width: 100%;
+  position: relative;
 `;
 const StyledImage = styled.img`
   width: 100%;
@@ -13,15 +19,41 @@ const StyledTitle = styled.div`
   position: absolute;
   top: 8px;
   left: 8px;
+  font-size: 48px;
+  font-weight: bold;
+  width: 100%;
 `;
-const StyledScrollText = styled.div``;
+const StyledScrollText = styled.div`
+  padding: 2px 8px;
+`;
+
+const StyledTopImageMask = styled.div`
+  position: absolute;
+  background: linear-gradient(to top, transparent, white);
+  width: 100%;
+  height: 30px;
+  top: 0;
+  left: 0;
+`;
+const StyledBottomImageMask = styled.div`
+  position: absolute;
+  background: linear-gradient(to bottom, transparent, white);
+  width: 100%;
+  height: 30px;
+  bottom: 0;
+  left: 0;
+`;
 
 export const ImageCardWithScrollText = React.memo(props => {
   const { imageUrl, title, linesOfDescription } = props;
   return (
     <StyledContainer>
       <StyledTitle>{title}</StyledTitle>
-      <StyledImage src={imageUrl} />
+      <StyledImageContainer>
+        <StyledTopImageMask />
+        <StyledImage src={imageUrl} />
+        <StyledBottomImageMask />
+      </StyledImageContainer>
       <StyledScrollText>
         <ScrollText linesOfDescription={linesOfDescription} />
       </StyledScrollText>

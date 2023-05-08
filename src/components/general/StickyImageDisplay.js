@@ -11,11 +11,11 @@ const StyledContainer = styled.div`
 const StyledLeftColumn = styled.div`
   position: sticky;
   top: 30px;
-  width: 50%;
+  width: 48%;
   align-self: flex-start;
 `;
 const StyledRightColumn = styled.div`
-  width: 50%;
+  width: 48%;
 `;
 
 export const StickyImageDisplay = React.memo(props => {
@@ -40,6 +40,7 @@ export const StickyImageDisplay = React.memo(props => {
               title={image?.title}
               description={image?.description}
               imageUrl={image?.imageUrl}
+              gradientColor={image?.gradientColor}
             />
           );
         })}
