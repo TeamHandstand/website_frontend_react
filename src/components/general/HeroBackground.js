@@ -33,8 +33,8 @@ export const HeroBackground = React.memo(props => {
       } else {
         opacity = (upperBound - currentScrollTop) / (upperBound - lowerBound);
       }
-      setOpacity(opacity);
     }
+    setOpacity(opacity);
   };
   React.useEffect(() => {
     if (fadeOnScroll) {

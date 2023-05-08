@@ -3,7 +3,13 @@ import styled from "styled-components";
 import { Header } from "../text/Header";
 import { ScrollText } from "../general/ScrollText";
 import { TestimonialWidget } from "../general/TestimonialWidget";
-const StyledContainer = styled.div``;
+const StyledContainer = styled.div`
+  width: 80%;
+  background-color: white;
+  border-radius: 13px;
+  padding: 30px 8px 8px 8px;
+  margin-top: 40px;
+`;
 export const TestimonialCard = React.memo(props => {
   return (
     <StyledContainer>

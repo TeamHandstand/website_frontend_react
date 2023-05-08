@@ -34,6 +34,11 @@ const StyledBackgroundContainer = styled.div`
   max-width: 100vw;
   height: 100vh;
 `;
+
+const StyledStickyContainer = styled.div`
+  width: 80%;
+  margin-top: 40px;
+`;
 export const Home = React.memo(props => {
   const firstLinks = [
     {
@@ -104,11 +109,6 @@ export const Home = React.memo(props => {
     }
   ];
 
-  React.useEffect(() => {
-    console.log("HOME HAS MOUNTED");
-  }, []);
-
-  console.log("HOME HAS RENDERED");
   return (
     <StyledContainer>
       <Header />
@@ -118,7 +118,9 @@ export const Home = React.memo(props => {
       <StyledContentContainer>
         <LinkList links={firstLinks} />
         <TestimonialCard />
-        <StickyImageDisplay images={images} />
+        <StyledStickyContainer>
+          <StickyImageDisplay images={images} />
+        </StyledStickyContainer>
         <CountCard />
         <LinkList header={"How can we help?"} links={secondLinks} />
         <Footer />
