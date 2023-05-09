@@ -39,6 +39,13 @@ const StyledStickyContainer = styled.div`
   width: 80%;
   margin-top: 40px;
 `;
+
+const StyledCountContainer = styled.div`
+  width: 80%;
+  margin-top: 40px;
+  border-radius: 13px;
+`;
+
 export const Home = React.memo(props => {
   const firstLinks = [
     {
@@ -133,7 +140,9 @@ export const Home = React.memo(props => {
         <StyledStickyContainer>
           <StickyImageDisplay images={images} />
         </StyledStickyContainer>
-        <CountCard />
+        <StyledCountContainer>
+          <CountCard />
+        </StyledCountContainer>
         <LinkList header={"How can we help?"} links={secondLinks} />
         <Footer />
       </StyledContentContainer>

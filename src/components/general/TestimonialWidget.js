@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { IconCapsule } from "./IconCapsule";
 import { LogoSelector } from "./LogoSelector";
+import { hexToRgba } from "../../helpers/hexToRgba";
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,7 +21,23 @@ const StyledImage = styled.img`
   opacity: 1;
   transition: opacity 1s;
 `;
-const StyledImageCaption = styled.div``;
+const StyledImageCaption = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: ${props =>
+    props.isHovered ? "translateY(-30%)" : "translateY(0)"};
+  transition: 0.5s;
+  color: white;
+  z-index: 10;
+`;
+
+const StyledCapsuleContainer = styled.div``;
+const StyledHiddenContainer = styled.div`
+  opacity: ${props => (props.isHovered ? "1" : "0")};
+
+  transition: 0.5s;
+`;
 const StyledImageSubheader = styled.div``;
 const StyledImageMask = styled.div`
   position: absolute;
@@ -28,8 +45,33 @@ const StyledImageMask = styled.div`
   height: 100%;
   top: 0;
   left: 0;
-  background-color: transparent;
+  background: linear-gradient(
+    to bottom,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.42 })} 0%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.42 })} 60.8%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.82 })} 75.7%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.82 })} 100%
+  );
+  transition: 0.3s;
   color: white;
+`;
+
+const StyledMaskMask = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    to bottom,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.0 })} 0%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.2 })} 50%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.6 })} 81%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 1 })} 82.2%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 1 })} 100%
+  );
+  opacity: ${props => (props.isHovered ? 1 : 0)};
+  transition: 0.3s;
 `;
 export const TestimonialWidget = React.memo(props => {
   const animationTime = 8000;
@@ -75,6 +117,8 @@ export const TestimonialWidget = React.memo(props => {
 
   const [storedInterval, setStoredInterval] = React.useState(null);
   const intervalRef = React.useRef(storedInterval);
+
+  const [isHovered, setIsHovered] = React.useState(false);
 
   const setIntervalRef = interval => {
     intervalRef.current = interval;
@@ -124,30 +168,50 @@ export const TestimonialWidget = React.memo(props => {
     }, 500);
   }, [selectedTestimonial]);
 
-  console.log("WIDGET HAS RENDERD");
+  const handleImageMouseOver = () => {
+    setIsHovered(true);
+  };
 
+  const handleImageMouseOut = () => {
+    setIsHovered(false);
+  };
   return (
     <StyledContainer>
-      <StyledImageContainer>
+      <StyledImageContainer
+        onMouseOver={handleImageMouseOver}
+        onMouseOut={handleImageMouseOut}
+      >
         <StyledImage
           src={selectedTestimonial?.background_image_url}
           ref={imageRef}
         ></StyledImage>
-        <StyledImageMask>
+        <StyledImageMask
+          gradientColor={selectedTestimonial?.gradient_color}
+          isHovered={isHovered}
+        >
           <StyledImageTitle>{selectedTestimonial?.name}</StyledImageTitle>
-          <StyledImageCaption>
+          <StyledImageCaption isHovered={isHovered}>
             <StyledImageSubheader>
               {selectedTestimonial?.headline_text}
             </StyledImageSubheader>
-            <IconCapsule
-              icon={""}
-              content={selectedTestimonial?.left_bubble_text}
-            />
-            <IconCapsule
-              icon={""}
-              content={selectedTestimonial?.right_bubble_text}
-            />
+            <StyledCapsuleContainer>
+              <IconCapsule
+                icon={""}
+                content={selectedTestimonial?.left_bubble_text}
+              />
+              <IconCapsule
+                icon={""}
+                content={selectedTestimonial?.right_bubble_text}
+              />
+            </StyledCapsuleContainer>
+            <StyledHiddenContainer isHovered={isHovered}>
+              Request an event like this ->
+            </StyledHiddenContainer>
           </StyledImageCaption>
+          <StyledMaskMask
+            isHovered={isHovered}
+            gradientColor={selectedTestimonial?.gradient_color}
+          ></StyledMaskMask>
         </StyledImageMask>
       </StyledImageContainer>
       <StyledSelectionContainer>
