@@ -10,9 +10,11 @@ import { Footer } from "../specific/Footer";
 
 import HeroImage from "../../images/SampleBackground.png";
 import { HeroBackground } from "../general/HeroBackground";
+import { colors } from "../../styles.js/colors";
+import { breakpoints } from "../../styles.js/breakpoints";
 
 const StyledContainer = styled.div`
-  background-color: lightgray;
+  background-color: ${colors.lightGrey};
 `;
 const StyledContentContainer = styled.div`
   width: 100%;
@@ -38,47 +40,62 @@ const StyledBackgroundContainer = styled.div`
 const StyledStickyContainer = styled.div`
   width: 80%;
   margin-top: 40px;
+  transition .3s;
+  @media (max-width: ${breakpoints.medium}px) {
+      width: 95%;
+  }
 `;
 
 const StyledCountContainer = styled.div`
   width: 80%;
-  margin-top: 40px;
+  margin: 40px 0px;
   border-radius: 13px;
+  overflow: hidden;
+  transition .3s;
+  @media (max-width: ${breakpoints.medium}px) {
+      width: 95%;
+  }
 `;
 
 export const Home = React.memo(props => {
   const firstLinks = [
     {
-      header: "Content",
-      content: "This is the content for the content.",
+      header: "Company Events",
+      content:
+        "Gamify your next team event with in-person, remote, or hybrid scavenger hunts.",
       url: ""
     },
     {
-      header: "Angles",
-      content: "Angles you say? We have thousands.",
+      header: "Public Game",
+      content:
+        "Play in The SF Hunt: a 12 hour, 100 riddle experience you shouldn’t miss.",
       url: ""
     },
     {
-      header: "Sausages",
-      content: "We take our casings and innards seriously here",
+      header: "Play Now",
+      content:
+        "Explore local neighborhoods while showing friends a great time.",
       url: ""
     }
   ];
 
   const secondLinks = [
     {
-      header: "Content",
-      content: "This is the content for the content.",
+      header: "Company Events",
+      content:
+        "Gamify your next team event with in-person, remote, or hybrid scavenger hunts.",
       url: ""
     },
     {
-      header: "Angles",
-      content: "Angles you say? We have thousands.",
+      header: "Public Game",
+      content:
+        "Play in The SF Hunt: a 12 hour, 100 riddle experience you shouldn’t miss.",
       url: ""
     },
     {
-      header: "Sausages",
-      content: "We take our casings and innards seriously here",
+      header: "Play Now",
+      content:
+        "Explore local neighborhoods while showing friends a great time.",
       url: ""
     }
   ];

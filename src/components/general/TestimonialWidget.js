@@ -3,6 +3,11 @@ import styled from "styled-components";
 import { IconCapsule } from "./IconCapsule";
 import { LogoSelector } from "./LogoSelector";
 import { hexToRgba } from "../../helpers/hexToRgba";
+import geoIcon from "../../images/icons/case-study-icon-geo.svg";
+import peopleIcon from "../../images/icons/case-study-icon-people.svg";
+import { distanceBetweenIndices } from "../../helpers/distanceBetweenIndices";
+import { LottieArrow } from "./LottieArrow";
+
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -11,11 +16,17 @@ const StyledContainer = styled.div`
 const StyledImageContainer = styled.div`
   position: relative;
   width: 100%;
+  cursor: pointer;
 `;
 const StyledSelectionContainer = styled.div`
   width: 100%;
+  margin-top: 20px;
 `;
-const StyledImageTitle = styled.div``;
+const StyledImageTitle = styled.div`
+  font-size: 40px;
+  margin-left: 12px;
+  margin-top: 12px;
+`;
 const StyledImage = styled.img`
   width: 100%;
   opacity: 1;
@@ -27,16 +38,28 @@ const StyledImageCaption = styled.div`
   left: 0;
   transform: ${props =>
     props.isHovered ? "translateY(-30%)" : "translateY(0)"};
-  transition: 0.5s;
+  transition: 0.3s;
   color: white;
   z-index: 10;
+  margin-left: 12px;
 `;
 
-const StyledCapsuleContainer = styled.div``;
+const StyledCapsuleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 340px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+`;
 const StyledHiddenContainer = styled.div`
   opacity: ${props => (props.isHovered ? "1" : "0")};
-
+  display: flex;
+  align-items: center;
   transition: 0.5s;
+`;
+
+const StyledHiddenText = styled.div`
+  margin-left: 8px;
 `;
 const StyledImageSubheader = styled.div``;
 const StyledImageMask = styled.div`
@@ -74,7 +97,7 @@ const StyledMaskMask = styled.div`
   transition: 0.3s;
 `;
 export const TestimonialWidget = React.memo(props => {
-  const animationTime = 8000;
+  const initialAnimationTime = 8000;
   const testimonials = [
     {
       order: "1",
@@ -84,7 +107,8 @@ export const TestimonialWidget = React.memo(props => {
       headline_text:
         "Google trusts us to be the main event at their annual holiday party.",
       gradient_color: "#4285F4",
-      logo_url: "https://picsum.photos/id/255/200/70",
+      logo_url:
+        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/airbnb-color%402x.png",
       background_image_url: "https://picsum.photos/id/250/1200/600"
     },
     {
@@ -94,7 +118,8 @@ export const TestimonialWidget = React.memo(props => {
       right_bubble_text: "In Person",
       headline_text: "Poodle is as Poodle does.",
       gradient_color: "#FF1830",
-      logo_url: "https://picsum.photos/id/211/200/70",
+      logo_url:
+        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/google-color%402x.png",
       background_image_url: "https://picsum.photos/id/212/1200/600"
     },
     {
@@ -105,10 +130,64 @@ export const TestimonialWidget = React.memo(props => {
       headline_text:
         "Not a corporate or public thing. Just Fernando. The man's a legend.",
       gradient_color: "#60E930",
-      logo_url: "https://picsum.photos/id/277/200/70",
+      logo_url:
+        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/linkedin-color%402x.png",
       background_image_url: "https://picsum.photos/id/288/1200/600"
+    },
+    {
+      order: "4",
+      name: "Superfly",
+      left_bubble_text: "1,200 people",
+      right_bubble_text: "In Person",
+      headline_text:
+        "Not a corporate or public thing. Just Fernando. The man's a legend.",
+      gradient_color: "#780a4c",
+      logo_url:
+        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/bain-color%402x.png",
+      background_image_url: "https://picsum.photos/id/311/1200/600"
+    },
+    {
+      order: "5",
+      name: "Jimothy",
+      left_bubble_text: "1,200 people",
+      right_bubble_text: "In Person",
+      headline_text:
+        "Not a corporate or public thing. Just Fernando. The man's a legend.",
+      gradient_color: "#018075",
+      logo_url:
+        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/uber-logo-larger2%402x.png",
+      background_image_url: "https://picsum.photos/id/382/1200/600"
+    },
+    {
+      order: "6",
+      name: "Inscrutable",
+      left_bubble_text: "1,200 people",
+      right_bubble_text: "In Person",
+      headline_text:
+        "Not a corporate or public thing. Just Fernando. The man's a legend.",
+      gradient_color: "#ba9f04",
+      logo_url:
+        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/linkedin-color%402x.png",
+      background_image_url: "https://picsum.photos/id/354/1200/600"
+    },
+    {
+      order: "7",
+      name: "Popeye",
+      left_bubble_text: "1,200 people",
+      right_bubble_text: "In Person",
+      headline_text:
+        "Not a corporate or public thing. Just Fernando. The man's a legend.",
+      gradient_color: "#320163",
+      logo_url:
+        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/linkedin-color%402x.png",
+      background_image_url: "https://picsum.photos/id/329/1200/600"
     }
   ];
+
+  const [animationTime, setAnimationTime] = React.useState(
+    initialAnimationTime
+  );
+  const [testimonialToStopOn, setTestimonialToStopOn] = React.useState({});
 
   const [selectedTestimonial, setSelectedTestimonial] = React.useState(
     testimonials[0]
@@ -119,6 +198,8 @@ export const TestimonialWidget = React.memo(props => {
   const intervalRef = React.useRef(storedInterval);
 
   const [isHovered, setIsHovered] = React.useState(false);
+
+  const [isMousedOver, setIsMousedOver] = React.useState(false);
 
   const setIntervalRef = interval => {
     intervalRef.current = interval;
@@ -153,11 +234,37 @@ export const TestimonialWidget = React.memo(props => {
     };
   }, []);
   const handleLogoClick = testimonial => {
+    if (testimonialToStopOn?.name) {
+      return false;
+    }
     console.log("THIS LOGO WAS CLICKED", testimonial, intervalRef.current);
     clearInterval(intervalRef.current);
+    // cycleThroughTestimonials(testimonial);
+    // TODO: wait 20s or so before restarting interval
     const interval = setInterval(intervalFunction, animationTime);
     setIntervalRef(interval);
     setTestimonialRef(testimonial);
+  };
+
+  const cycleThroughTestimonials = targetTestimonial => {
+    const from = testimonials.findIndex(
+      t => t.name === selectedTestimonial.name
+    );
+    const to = testimonials.findIndex(t => t.name === targetTestimonial.name);
+    const distanceToNextTestimonial = distanceBetweenIndices({
+      from,
+      to,
+      length: testimonials.length
+    });
+    console.log("FROM TO DIST", from, to, distanceToNextTestimonial);
+    if (distanceToNextTestimonial === 0) {
+      return false;
+    }
+    setTestimonialToStopOn(targetTestimonial);
+    const newAnimationTime = initialAnimationTime / distanceToNextTestimonial;
+    setAnimationTime(newAnimationTime);
+    const interval = setInterval(intervalFunction, newAnimationTime);
+    setIntervalRef(interval);
   };
 
   React.useEffect(() => {
@@ -175,6 +282,7 @@ export const TestimonialWidget = React.memo(props => {
   const handleImageMouseOut = () => {
     setIsHovered(false);
   };
+
   return (
     <StyledContainer>
       <StyledImageContainer
@@ -196,16 +304,17 @@ export const TestimonialWidget = React.memo(props => {
             </StyledImageSubheader>
             <StyledCapsuleContainer>
               <IconCapsule
-                icon={""}
-                content={selectedTestimonial?.left_bubble_text}
+                icon={geoIcon}
+                text={selectedTestimonial?.left_bubble_text}
               />
               <IconCapsule
-                icon={""}
-                content={selectedTestimonial?.right_bubble_text}
+                icon={peopleIcon}
+                text={selectedTestimonial?.right_bubble_text}
               />
             </StyledCapsuleContainer>
             <StyledHiddenContainer isHovered={isHovered}>
-              Request an event like this ->
+              <StyledHiddenText>Request an event like this</StyledHiddenText>
+              <LottieArrow isMousedOver={isHovered} />
             </StyledHiddenContainer>
           </StyledImageCaption>
           <StyledMaskMask

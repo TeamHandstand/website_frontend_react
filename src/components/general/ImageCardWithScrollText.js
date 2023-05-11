@@ -22,9 +22,11 @@ const StyledTitle = styled.div`
   font-size: 48px;
   font-weight: bold;
   width: 100%;
+  z-index: 2;
 `;
 const StyledScrollText = styled.div`
   padding: 2px 8px;
+  font-size: 22px;
 `;
 
 const StyledTopImageMask = styled.div`

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { colors } from "../../styles.js/colors";
 const StyledImageContainer = styled.div`
   position: absolute;
   width: 100%;
@@ -11,7 +12,28 @@ const StyledContainer = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: lightgray;
+  background-color: ${colors.lightGrey};
+`;
+
+const StyledTextContainer = styled.div`
+  position: absolute;
+  width: 75%;
+  top: 100px;
+  left: 50%;
+  color: white;
+  opacity: ${props => props.opacity};
+  transform: translateX(-50%);
+`;
+
+const StyledHeader = styled.div`
+  font-size: 70px;
+  font-weight: bold;
+  margin-bottom: 30px;
+`;
+
+const StyledSubheader = styled.div`
+  font-size: 30px;
+  text-align: left;
 `;
 
 const StyledImage = styled.img``;
@@ -51,6 +73,13 @@ export const HeroBackground = React.memo(props => {
       <StyledImageContainer opacity={opacity}>
         <StyledImage src={imageUrl} />
       </StyledImageContainer>
+      <StyledTextContainer opacity={opacity}>
+        <StyledHeader>We craft experiences to make you smile</StyledHeader>
+        <StyledSubheader>
+          Large-scale events that bring people together and create strong
+          memories.
+        </StyledSubheader>
+      </StyledTextContainer>
     </StyledContainer>
   );
 });

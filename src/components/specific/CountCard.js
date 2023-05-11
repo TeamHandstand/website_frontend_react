@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Header } from "../text/Header";
 import { Text } from "../text/Text";
 import { Subheader } from "../text/Subheader";
+import { breakpoints } from "../../styles.js/breakpoints";
 
 const StyledContainer = styled.div`
   position: relative;
@@ -25,25 +26,50 @@ const StyledImageOverlay = styled.div`
 const StyledTextContainer = styled.div`
   width: 100%;
   color: white;
+  text-align: center;
+`;
+
+const StyledHeader = styled.div`
+  font-size: 52px;
+  font-weight: bold;
+  @media (max-width: ${breakpoints.medium}px) {
+    font-size: 32px;
+  }
+`;
+
+const StyledSubheader = styled.div`
+  font-size: 22px;
+  font-weight: normal;
+  @media (max-width: ${breakpoints.medium}px) {
+    font-size: 18px;
+  }
 `;
 const StyledCardContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
   text-align: center;
-  margin-bottom: 10px;
+  padding: 8px;
+  max-width: 1000px;
+  margin-bottom: 20px;
 `;
 const StyledCountCard = styled.div`
-  width: 20%;
+  width: 24%;
+  max-width: 200px;
   height: 140px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 8px;
+  align-items: flex-start;
+  padding: 14px;
   background-color: white;
   color: black;
   border-radius: 13px;
+  text-align: left;
+  @media (max-width: ${breakpoints.medium}px) {
+    height: 100px;
+  }
 `;
 export const CountCard = React.memo(props => {
   return (
@@ -51,12 +77,12 @@ export const CountCard = React.memo(props => {
       <StyledImage src={"https://picsum.photos/id/244/1200/600"}></StyledImage>
       <StyledImageOverlay>
         <StyledTextContainer>
-          <Header content={"We've been at this awhile"} />
-          <Text
-            content={
-              "Hundreds of events under our belt, and the next will be our best one yet."
-            }
-          />
+          <StyledHeader>We've been at this awhile</StyledHeader>
+
+          <StyledSubheader>
+            Hundreds of events under our belt, and the next will be our best one
+            yet.
+          </StyledSubheader>
         </StyledTextContainer>
         <StyledCardContainer>
           <StyledCountCard>

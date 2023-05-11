@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { ScrollTextLine } from "./ScrollTextLine";
-const StyledContainer = styled.div``;
+const StyledContainer = styled.div`
+  display: inline-block;
+`;
 export const ScrollText = React.memo(props => {
   const { linesOfDescription } = props;
   return (

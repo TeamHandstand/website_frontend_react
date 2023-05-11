@@ -2,22 +2,31 @@ import React from "react";
 import styled from "styled-components";
 const StyledContainer = styled.div`
   width: 100%;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
 `;
 const StyledLogo = styled.img`
   width: 100%;
   height: auto;
-  filter: ${props => (props.isSelected ? "none" : "grayscale(100)")};
+  filter: ${props => (props.isSelected ? "grayscale(0)" : "grayscale(100)")};
+  transition: 2s;
+  padding: 8px 12px;
 `;
 const StyledLoadingBarContainer = styled.div`
   width: 100%;
   position: relative;
-  height: 3px;
+  height: 5px;
 `;
 const StyledLoadingBar = styled.div`
   width: 100%;
   height: 100%;
   opacity: ${props => (props?.isSelected ? ".3" : "0")};
   background-color: ${props => props?.testimonial?.gradient_color};
+  z-index: 2;
+  transition: opacity 1s;
 `;
 const StyledLoadingBarMask = styled.div`
   position: absolute;
@@ -27,7 +36,17 @@ const StyledLoadingBarMask = styled.div`
   background-color: ${props => props?.testimonial?.gradient_color};
   opacity: ${props => (props.isSelected ? 1 : 0)};
   width: ${props => props.width}px;
-  transition: ${props => (props.isSelected ? props.animationTime / 1000 : 0)}s;
+  transition: width
+      ${props => (props.isSelected ? props.animationTime / 1000 : 0)}s,
+    opacity 1s;
+`;
+
+const StyledPositionContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 export const LogoWithLoadingBar = React.memo(props => {
@@ -44,18 +63,20 @@ export const LogoWithLoadingBar = React.memo(props => {
   }, [isSelected]);
   return (
     <StyledContainer onClick={onLogoClick} ref={containerRef}>
-      <StyledLoadingBarContainer>
-        <StyledLoadingBar
-          isSelected={isSelected}
-          testimonial={testimonial}
-        ></StyledLoadingBar>
-        <StyledLoadingBarMask
-          width={width}
-          testimonial={testimonial}
-          isSelected={isSelected}
-          animationTime={animationTime}
-        ></StyledLoadingBarMask>
-      </StyledLoadingBarContainer>
+      <StyledPositionContainer>
+        <StyledLoadingBarContainer>
+          <StyledLoadingBar
+            isSelected={isSelected}
+            testimonial={testimonial}
+          ></StyledLoadingBar>
+          <StyledLoadingBarMask
+            width={width}
+            testimonial={testimonial}
+            isSelected={isSelected}
+            animationTime={animationTime}
+          ></StyledLoadingBarMask>
+        </StyledLoadingBarContainer>
+      </StyledPositionContainer>
       <StyledLogo src={testimonial?.logo_url} isSelected={isSelected} />
     </StyledContainer>
   );

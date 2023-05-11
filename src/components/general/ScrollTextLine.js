@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { isInViewport } from "../../helpers/isInViewport";
+import { getRandomInteger } from "../../helpers/getRandomInteger";
 const StyledContainer = styled.div`
   position: relative;
 `;
@@ -8,6 +9,7 @@ const StyledText = styled.div`
   color: grey;
   background-color: white;
   z-index: 1;
+  white-space: nowrap;
 `;
 const StyledMask = styled.div`
   position: absolute;
@@ -22,6 +24,7 @@ const StyledMask = styled.div`
   transition: 0.1s;
   z-index: 2;
   overflow: hidden;
+  white-space: nowrap;
 `;
 export const ScrollTextLine = React.memo(props => {
   const { line } = props;
@@ -56,10 +59,11 @@ export const ScrollTextLine = React.memo(props => {
   const scrollUpOrDownFunction = () => {
     const currentScrollTop =
       window?.pageYOffset || document?.documentElement?.scrollTop;
+
     if (currentScrollTop > scrollRef.current) {
       // scrolled down
       const newWidth = Math.min(
-        Number(widthRef.current + 10),
+        Number(widthRef.current + getRandomInteger({ min: 5, max: 25 })),
         textRef?.current?.offsetWidth
       );
       setWidthRef(newWidth);
@@ -67,7 +71,10 @@ export const ScrollTextLine = React.memo(props => {
 
     if (currentScrollTop < scrollRef.current) {
       //   scrolled up
-      const newWidth = Math.max(0, Number(widthRef.current - 10));
+      const newWidth = Math.max(
+        0,
+        Number(widthRef.current - getRandomInteger({ min: 5, max: 25 }))
+      );
       setWidthRef(newWidth);
     }
     setScrollRef(currentScrollTop);
