@@ -59,6 +59,9 @@ const StyledButtonContainer = styled.div`
   width: 25%;
   display: flex;
   justify-content: center;
+  @media (max-width: ${breakpoints.medium}px) {
+    width: auto;
+  }
 `;
 
 const StyledLogo = styled.img`

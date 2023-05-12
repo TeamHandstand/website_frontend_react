@@ -73,19 +73,6 @@ const StyledCountCard = styled.div`
 `;
 
 const StyledCountUp = styled.div`
-  @property --num {
-    syntax: "<integer>";
-    initial-value: 12000;
-    inherits: false;
-  }
-  transition: --num 5s;
-  counter-reset: num var(--num);
-  &:hover {
-    --num: 20000;
-  }
-  &::before {
-    content: counter(num);
-  }
   font-size: 22px;
   font-weight: bold;
   @media (max-width: ${breakpoints.medium}px) {
@@ -93,6 +80,25 @@ const StyledCountUp = styled.div`
   }
 `;
 export const CountCard = React.memo(props => {
+  const initialCountValue = 12000;
+  const [countValue, setCountValue] = React.useState(initialCountValue);
+  const countRef = React.useRef(countValue);
+  const setCountRef = count => {
+    setCountValue(count);
+    countRef.current = count;
+  };
+  const scrollHandler = () => {
+    const currentScrollTop =
+      window?.pageYOffset || document?.documentElement?.scrollTop;
+    const additionalCount = parseInt(currentScrollTop / 3);
+    setCountRef(initialCountValue + additionalCount);
+  };
+  React.useEffect(() => {
+    document?.addEventListener("scroll", scrollHandler);
+    return () => {
+      document?.removeEventListener("scroll", scrollHandler);
+    };
+  }, []);
   return (
     <StyledContainer>
       <StyledImage src={"https://picsum.photos/id/244/1200/600"}></StyledImage>
@@ -111,7 +117,7 @@ export const CountCard = React.memo(props => {
             <Text content={"Events organized"} />
           </StyledCountCard>
           <StyledCountCard>
-            <StyledCountUp>+</StyledCountUp>
+            <StyledCountUp>{countValue}</StyledCountUp>
             <Text content={"People entertained"} />
           </StyledCountCard>
           <StyledCountCard>

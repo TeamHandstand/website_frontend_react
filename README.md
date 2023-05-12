@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Setup
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- navigate to directory root and run `npm run start`, then go to `localhost:3000`
+- if there is a problem with the above command, ensure Node.js and npm are installed on your system
 
-## Available Scripts
+# Configurable
 
-In the project directory, you can run:
+    - In HeroBackground.js, there is a `scrollHandler`  function with variables for `lowerBound` and `upperBound`. Adjust those variables to set the start and stop points for the hero background to begin its opacity change from 1 to 0. These variables are integers and in pixels.
 
-### `npm start`
+    - For TestimonialWidget.js, there is an `initialAnimationTime` variable that controls how long to stay on each testimonial.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    - For CountCard.js, there is a `scrollHandler` function that controls the count rate for the scrolling counter. There is an `initialCountValue` of 12000 and an `additionalCount` variable that takes the number of pixels scrolled, does somehthing to that number, then adds it to the initialCountValue and displays that sum on the card.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# TODO
 
-### `npm test`
+    - final Button styling w/ :hover and :active effects
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    - TestimonialWidget gradient overlay/text slide in and out
+    - Stop TestimonialWidget on logo click (for some amount of time)
 
-### `npm run build`
+    - Final styling + real image for CountCard
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    - Add functionality to email input/button + success state
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    - Loading states for initial image loads
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    MOBILE
+        - scrolltext
+        - testimonial widget
 
-### `npm run eject`
+    Large Screens
+        - font size adjustments
+        - ...
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    - add URLS to Header, Footer, and LinkLines
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# For Gil / Integration to existing app
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    - in CustomLink.js, there are instructions to import and use a <Link /> component (likely from react-router-dom or similar) and add it to the file. This should enable all the links on the new homepage to navigate appropriately.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    - Let me know if anything comes up :)

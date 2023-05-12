@@ -13,6 +13,9 @@ const StyledContainer = styled.div`
   height: 100%;
   position: relative;
   background-color: ${colors.lightGrey};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyledTextContainer = styled.div`
@@ -37,7 +40,9 @@ const StyledSubheader = styled.div`
 `;
 
 const StyledImage = styled.img`
-  width: 100%;
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
 `;
 
 export const HeroBackground = React.memo(props => {

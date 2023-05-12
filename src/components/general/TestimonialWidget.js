@@ -86,7 +86,6 @@ const StyledImageMask = styled.div`
   );
   transition: opacity 0.3s, transform 1s;
   color: white;
-  transform: translateX(${props => props.transformValue});
 `;
 
 const StyledMaskMask = styled.div`
@@ -107,18 +106,6 @@ const StyledMaskMask = styled.div`
   transition: 0.3s;
 `;
 
-const transitions = {
-  entering: {
-    transformValue: "100%"
-  },
-  entered: {
-    transformValue: "0%"
-  },
-  exiting: {
-    transformValue: "-100%"
-  },
-  exited: {}
-};
 export const TestimonialWidget = React.memo(props => {
   const { jsonData } = props;
   const initialAnimationTime = 8000;
@@ -231,46 +218,37 @@ export const TestimonialWidget = React.memo(props => {
           src={selectedTestimonial?.background_image_url}
           ref={imageRef}
         ></StyledImage>
-        <Transition in={isAnimated} timeout={100}>
-          {state => {
-            return (
-              <StyledImageMask
-                gradientColor={selectedTestimonial?.gradient_color}
-                isHovered={isHovered}
-                transformValue={transitions[state]?.transformValue}
-              >
-                <StyledImageTitle
-                  src={selectedTestimonial?.logo_url}
-                ></StyledImageTitle>
-                <StyledImageCaption isHovered={isHovered}>
-                  <StyledImageSubheader>
-                    {selectedTestimonial?.headline_text}
-                  </StyledImageSubheader>
-                  <StyledCapsuleContainer>
-                    <IconCapsule
-                      icon={geoIcon}
-                      text={selectedTestimonial?.left_bubble_text}
-                    />
-                    <IconCapsule
-                      icon={peopleIcon}
-                      text={selectedTestimonial?.right_bubble_text}
-                    />
-                  </StyledCapsuleContainer>
-                  <StyledHiddenContainer isHovered={isHovered}>
-                    <StyledHiddenText>
-                      Request an event like this
-                    </StyledHiddenText>
-                    <LottieArrow isMousedOver={isHovered} isWhite />
-                  </StyledHiddenContainer>
-                </StyledImageCaption>
-                <StyledMaskMask
-                  isHovered={isHovered}
-                  gradientColor={selectedTestimonial?.gradient_color}
-                ></StyledMaskMask>
-              </StyledImageMask>
-            );
-          }}
-        </Transition>
+        <StyledImageMask
+          gradientColor={selectedTestimonial?.gradient_color}
+          isHovered={isHovered}
+        >
+          <StyledImageTitle
+            src={selectedTestimonial?.logo_url}
+          ></StyledImageTitle>
+          <StyledImageCaption isHovered={isHovered}>
+            <StyledImageSubheader>
+              {selectedTestimonial?.headline_text}
+            </StyledImageSubheader>
+            <StyledCapsuleContainer>
+              <IconCapsule
+                icon={geoIcon}
+                text={selectedTestimonial?.left_bubble_text}
+              />
+              <IconCapsule
+                icon={peopleIcon}
+                text={selectedTestimonial?.right_bubble_text}
+              />
+            </StyledCapsuleContainer>
+            <StyledHiddenContainer isHovered={isHovered}>
+              <StyledHiddenText>Request an event like this</StyledHiddenText>
+              <LottieArrow isMousedOver={isHovered} isWhite />
+            </StyledHiddenContainer>
+          </StyledImageCaption>
+          <StyledMaskMask
+            isHovered={isHovered}
+            gradientColor={selectedTestimonial?.gradient_color}
+          ></StyledMaskMask>
+        </StyledImageMask>
       </StyledImageContainer>
       <StyledSelectionContainer>
         <LogoSelector

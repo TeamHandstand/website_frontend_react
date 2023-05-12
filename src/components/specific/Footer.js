@@ -118,13 +118,16 @@ const StyledInputSubheader = styled.div`
 const StyledInputButtonContainer = styled.div`
   display: flex;
   width: 100%;
+  @media (max-width: ${breakpoints.medium}px) {
+    transform: translateX(12px);
+  }
 `;
 const StyledInputContainer = styled.div`
   width: 70%;
 `;
 const StyledButtonContainer = styled.div`
   width: 30%;
-  transform: translateX(-20%);
+  transform: translateX(-25px);
 `;
 export const Footer = React.memo(props => {
   const [inputValue, setInputValue] = React.useState("");
