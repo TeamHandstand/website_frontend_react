@@ -24,6 +24,8 @@
 
     - Loading states for initial image loads
 
+    - Final Styling for Born From Fun Sticky Image
+
     MOBILE
         - scrolltext
         - testimonial widget
