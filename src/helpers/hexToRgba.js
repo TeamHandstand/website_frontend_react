@@ -10,6 +10,5 @@ export const hexToRgba = ({ hex, a }) => {
       "rgba(" + [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") + `,${a})`;
     return result;
   }
-  console.log("BAD HEX VALUE: ", hex, a);
   return "rgba(0, 0, 0, 1)";
 };

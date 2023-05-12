@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { hexToRgba } from "../../helpers/hexToRgba";
 const StyledContainer = styled.div`
   width: 100%;
   position: relative;
@@ -27,8 +28,9 @@ const StyledTitle = styled.div`
   color: white;
   background: linear-gradient(
     to bottom,
-    ${props => props.gradientColor},
-    transparent
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.55 })} 0%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.2 })} 67%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0 })} 100%
   );
 `;
 const StyledImage = styled.img`

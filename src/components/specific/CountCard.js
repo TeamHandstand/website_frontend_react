@@ -71,6 +71,27 @@ const StyledCountCard = styled.div`
     height: 100px;
   }
 `;
+
+const StyledCountUp = styled.div`
+  @property --num {
+    syntax: "<integer>";
+    initial-value: 12000;
+    inherits: false;
+  }
+  transition: --num 5s;
+  counter-reset: num var(--num);
+  &:hover {
+    --num: 20000;
+  }
+  &::before {
+    content: counter(num);
+  }
+  font-size: 22px;
+  font-weight: bold;
+  @media (max-width: ${breakpoints.medium}px) {
+    font-size: 16px;
+  }
+`;
 export const CountCard = React.memo(props => {
   return (
     <StyledContainer>
@@ -90,7 +111,7 @@ export const CountCard = React.memo(props => {
             <Text content={"Events organized"} />
           </StyledCountCard>
           <StyledCountCard>
-            <Subheader content={"12000+"} />
+            <StyledCountUp>+</StyledCountUp>
             <Text content={"People entertained"} />
           </StyledCountCard>
           <StyledCountCard>

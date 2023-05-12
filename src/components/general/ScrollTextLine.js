@@ -9,7 +9,6 @@ const StyledText = styled.div`
   color: grey;
   background-color: white;
   z-index: 1;
-  white-space: nowrap;
 `;
 const StyledMask = styled.div`
   position: absolute;
@@ -92,7 +91,7 @@ export const ScrollTextLine = React.memo(props => {
     if (isInView) {
       addScrollListener();
     } else {
-      //   removeScrollListener();
+      removeScrollListener();
     }
   }, [isInView]);
 

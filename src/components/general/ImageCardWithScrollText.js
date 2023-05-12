@@ -6,7 +6,7 @@ const StyledContainer = styled.div`
   border-radius: 13px;
   width: 100%;
   background-color: white;
-  padding: 60px 0px 30px 0px;
+  overflow: hidden;
 `;
 const StyledImageContainer = styled.div`
   width: 100%;

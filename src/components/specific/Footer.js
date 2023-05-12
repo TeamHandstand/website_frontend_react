@@ -5,6 +5,7 @@ import { colors } from "../../styles.js/colors";
 import { Input } from "../general/Input";
 import { Button } from "../general/Button";
 import { breakpoints } from "../../styles.js/breakpoints";
+import logo from "../../images/logos/handstand-footer-logo.svg";
 const StyledContainer = styled.div`
   width: 100%;
   display: flex;
@@ -23,13 +24,37 @@ const StyledInfoSection = styled.div`
   width: 35%;
   display: flex;
   @media (max-width: ${breakpoints.medium}px) {
-    width: 100%:
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `;
-const StyledLogo = styled.img``;
+const StyledLogo = styled.img`
+  width: 60px;
+  height: auto;
+`;
+const StyledLogoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-right: 12px;
+  @media (max-width: ${breakpoints.medium}px) {
+    height: auto;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+`;
 const StyledText = styled.div`
   display: flex;
   flex-direction: column;
+  margin-right: 10px;
+  @media (max-width: ${breakpoints.medium}px) {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-right: 0;
+  }
 `;
 const StyledHeader = styled.div`
   font-weight: bold;
@@ -48,6 +73,7 @@ const StyledLinkSection = styled.div`
     justify-content: center;
     align-items: baseline;
     margin-top: 20px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -75,6 +101,8 @@ const StyledInputSection = styled.div`
   flex-direction: column;
   @media (max-width: ${breakpoints.medium}px) {
     width: 100%;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
@@ -89,6 +117,7 @@ const StyledInputSubheader = styled.div`
 `;
 const StyledInputButtonContainer = styled.div`
   display: flex;
+  width: 100%;
 `;
 const StyledInputContainer = styled.div`
   width: 70%;
@@ -106,7 +135,11 @@ export const Footer = React.memo(props => {
   return (
     <StyledContainer>
       <StyledInfoSection>
-        <StyledLogo></StyledLogo>
+        <CustomLink to={""}>
+          <StyledLogoContainer>
+            <StyledLogo src={logo}></StyledLogo>
+          </StyledLogoContainer>
+        </CustomLink>
         <StyledText>
           <StyledHeader>Our Mission</StyledHeader>
           <StyledSubheader>
@@ -160,7 +193,7 @@ export const Footer = React.memo(props => {
           </StyledInputContainer>
           <StyledButtonContainer>
             <Button
-              color={"green"}
+              color={"#3ECF8E"}
               fontColor={"white"}
               onClick={handleButtonClick}
             >

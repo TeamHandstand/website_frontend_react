@@ -2,12 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import Lottie from "lottie-react";
 import animationData from "../../lottieFiles/arrow.json";
+import whiteArrow from "../../lottieFiles/arrow-white.json";
 const StyledContainer = styled.div`
-  height: 32px;
-  width: 32px;
+  height: 28px;
+  width: 28px;
 `;
 export const LottieArrow = React.memo(props => {
-  const { isMousedOver } = props;
+  const { isMousedOver, isWhite } = props;
   const lottieRef = React.useRef();
 
   React.useEffect(() => {
@@ -23,7 +24,7 @@ export const LottieArrow = React.memo(props => {
     <StyledContainer>
       <Lottie
         lottieRef={lottieRef}
-        animationData={animationData}
+        animationData={isWhite ? whiteArrow : animationData}
         onComplete={handleComplete}
         loop={false}
       />

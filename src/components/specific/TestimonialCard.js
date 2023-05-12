@@ -28,6 +28,7 @@ const StyledTextContainer = styled.div`
   margin-bottom: 18px;
 `;
 export const TestimonialCard = React.memo(props => {
+  const { jsonData } = props;
   return (
     <StyledContainer>
       <StyledHeader>Trusted by the Companies You Trust</StyledHeader>
@@ -39,7 +40,7 @@ export const TestimonialCard = React.memo(props => {
           ]}
         />
       </StyledTextContainer>
-      <TestimonialWidget />
+      <TestimonialWidget jsonData={jsonData} />
     </StyledContainer>
   );
 });

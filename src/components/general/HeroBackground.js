@@ -36,7 +36,9 @@ const StyledSubheader = styled.div`
   text-align: left;
 `;
 
-const StyledImage = styled.img``;
+const StyledImage = styled.img`
+  width: 100%;
+`;
 
 export const HeroBackground = React.memo(props => {
   const { imageUrl, videoUrl, fadeOnScroll } = props;
@@ -48,7 +50,6 @@ export const HeroBackground = React.memo(props => {
     let opacity = 1;
     let lowerBound = 300;
     let upperBound = 700;
-    console.log("CURRENT SCROLL TOP IS", currentScrollTop);
     if (currentScrollTop > lowerBound) {
       if (currentScrollTop > upperBound) {
         opacity = 0;

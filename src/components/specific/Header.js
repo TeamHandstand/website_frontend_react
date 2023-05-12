@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { HeaderQuoteButton } from "./HeaderQuoteButton";
 import { CustomLink } from "../general/CustomLink";
+import logo from "../../images/logos/logo-handstand-header.svg";
+import { breakpoints } from "../../styles.js/breakpoints";
 const StyledContainer = styled.div`
   position: sticky;
   top: 0;
@@ -10,6 +12,7 @@ const StyledContainer = styled.div`
   height: 60px;
   transition: 0.1s;
   z-index: 100;
+  overflow: hidden;
 `;
 const StyledHeader = styled.div`
   background-color: transparent;
@@ -26,11 +29,6 @@ const StyledLink = styled.div`
   z-index: 100;
   margin-left: 12px;
   cursor: pointer;
-  transform: scale(1);
-  &:hover {
-    transform: scale(0.9);
-  }
-  transition: 0.2s;
 `;
 const StyledHeaderMask = styled.div`
   background-color: white;
@@ -52,12 +50,23 @@ const StyledLinkContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   width: 75%;
+  @media (max-width: ${breakpoints.medium}px) {
+    display: none;
+  }
 `;
 
 const StyledButtonContainer = styled.div`
   width: 25%;
   display: flex;
   justify-content: center;
+`;
+
+const StyledLogo = styled.img`
+  width: 120px;
+  height: auto;
+  margin-right: 20px;
+  margin-left: 12px;
+  filter: ${props => (props.isBlack ? "brightness(0) saturate(100%)" : "none")};
 `;
 
 export const Header = React.memo(props => {
@@ -103,6 +112,9 @@ export const Header = React.memo(props => {
   return (
     <StyledContainer>
       <StyledHeader maskOpacity={maskOpacity}>
+        <CustomLink to={""}>
+          <StyledLogo src={logo} strokeColor={"white"} />
+        </CustomLink>
         <StyledLinkContainer>
           <StyledLink>Company Events</StyledLink>
           <StyledLink>Public Games</StyledLink>
@@ -117,6 +129,9 @@ export const Header = React.memo(props => {
         </StyledButtonContainer>
       </StyledHeader>
       <StyledHeaderMask maskOpacity={maskOpacity}>
+        <CustomLink to={""}>
+          <StyledLogo src={logo} isBlack />
+        </CustomLink>
         <StyledLinkContainer>
           <CustomLink to={""}>
             <StyledLink>Company Events</StyledLink>

@@ -7,7 +7,7 @@ import geoIcon from "../../images/icons/case-study-icon-geo.svg";
 import peopleIcon from "../../images/icons/case-study-icon-people.svg";
 import { distanceBetweenIndices } from "../../helpers/distanceBetweenIndices";
 import { LottieArrow } from "./LottieArrow";
-
+import { Transition } from "react-transition-group";
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -17,15 +17,18 @@ const StyledImageContainer = styled.div`
   position: relative;
   width: 100%;
   cursor: pointer;
+  overflow: hidden;
 `;
 const StyledSelectionContainer = styled.div`
   width: 100%;
   margin-top: 20px;
 `;
-const StyledImageTitle = styled.div`
-  font-size: 40px;
+const StyledImageTitle = styled.img`
   margin-left: 12px;
   margin-top: 12px;
+  width: 220px;
+  height: auto;
+  filter: brightness(0) invert(1);
 `;
 const StyledImage = styled.img`
   width: 100%;
@@ -60,8 +63,14 @@ const StyledHiddenContainer = styled.div`
 
 const StyledHiddenText = styled.div`
   margin-left: 8px;
+  font-size: 24px;
 `;
-const StyledImageSubheader = styled.div``;
+const StyledImageSubheader = styled.div`
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  max-width: 650px;
+`;
 const StyledImageMask = styled.div`
   position: absolute;
   width: 100%;
@@ -75,8 +84,9 @@ const StyledImageMask = styled.div`
     ${props => hexToRgba({ hex: props.gradientColor, a: 0.82 })} 75.7%,
     ${props => hexToRgba({ hex: props.gradientColor, a: 0.82 })} 100%
   );
-  transition: 0.3s;
+  transition: opacity 0.3s, transform 1s;
   color: white;
+  transform: translateX(${props => props.transformValue});
 `;
 
 const StyledMaskMask = styled.div`
@@ -96,93 +106,22 @@ const StyledMaskMask = styled.div`
   opacity: ${props => (props.isHovered ? 1 : 0)};
   transition: 0.3s;
 `;
+
+const transitions = {
+  entering: {
+    transformValue: "100%"
+  },
+  entered: {
+    transformValue: "0%"
+  },
+  exiting: {
+    transformValue: "-100%"
+  },
+  exited: {}
+};
 export const TestimonialWidget = React.memo(props => {
+  const { jsonData } = props;
   const initialAnimationTime = 8000;
-  const testimonials = [
-    {
-      order: "1",
-      name: "Google",
-      left_bubble_text: "1,200 people",
-      right_bubble_text: "In Person",
-      headline_text:
-        "Google trusts us to be the main event at their annual holiday party.",
-      gradient_color: "#4285F4",
-      logo_url:
-        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/airbnb-color%402x.png",
-      background_image_url: "https://picsum.photos/id/250/1200/600"
-    },
-    {
-      order: "2",
-      name: "Poodle",
-      left_bubble_text: "1,200 people",
-      right_bubble_text: "In Person",
-      headline_text: "Poodle is as Poodle does.",
-      gradient_color: "#FF1830",
-      logo_url:
-        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/google-color%402x.png",
-      background_image_url: "https://picsum.photos/id/212/1200/600"
-    },
-    {
-      order: "3",
-      name: "Fernando",
-      left_bubble_text: "1,200 people",
-      right_bubble_text: "In Person",
-      headline_text:
-        "Not a corporate or public thing. Just Fernando. The man's a legend.",
-      gradient_color: "#60E930",
-      logo_url:
-        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/linkedin-color%402x.png",
-      background_image_url: "https://picsum.photos/id/288/1200/600"
-    },
-    {
-      order: "4",
-      name: "Superfly",
-      left_bubble_text: "1,200 people",
-      right_bubble_text: "In Person",
-      headline_text:
-        "Not a corporate or public thing. Just Fernando. The man's a legend.",
-      gradient_color: "#780a4c",
-      logo_url:
-        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/bain-color%402x.png",
-      background_image_url: "https://picsum.photos/id/311/1200/600"
-    },
-    {
-      order: "5",
-      name: "Jimothy",
-      left_bubble_text: "1,200 people",
-      right_bubble_text: "In Person",
-      headline_text:
-        "Not a corporate or public thing. Just Fernando. The man's a legend.",
-      gradient_color: "#018075",
-      logo_url:
-        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/uber-logo-larger2%402x.png",
-      background_image_url: "https://picsum.photos/id/382/1200/600"
-    },
-    {
-      order: "6",
-      name: "Inscrutable",
-      left_bubble_text: "1,200 people",
-      right_bubble_text: "In Person",
-      headline_text:
-        "Not a corporate or public thing. Just Fernando. The man's a legend.",
-      gradient_color: "#ba9f04",
-      logo_url:
-        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/linkedin-color%402x.png",
-      background_image_url: "https://picsum.photos/id/354/1200/600"
-    },
-    {
-      order: "7",
-      name: "Popeye",
-      left_bubble_text: "1,200 people",
-      right_bubble_text: "In Person",
-      headline_text:
-        "Not a corporate or public thing. Just Fernando. The man's a legend.",
-      gradient_color: "#320163",
-      logo_url:
-        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/logos/linkedin-color%402x.png",
-      background_image_url: "https://picsum.photos/id/329/1200/600"
-    }
-  ];
 
   const [animationTime, setAnimationTime] = React.useState(
     initialAnimationTime
@@ -190,7 +129,7 @@ export const TestimonialWidget = React.memo(props => {
   const [testimonialToStopOn, setTestimonialToStopOn] = React.useState({});
 
   const [selectedTestimonial, setSelectedTestimonial] = React.useState(
-    testimonials[0]
+    jsonData?.testimonials[0]
   );
   const testimonialRef = React.useRef(selectedTestimonial);
 
@@ -199,7 +138,7 @@ export const TestimonialWidget = React.memo(props => {
 
   const [isHovered, setIsHovered] = React.useState(false);
 
-  const [isMousedOver, setIsMousedOver] = React.useState(false);
+  const [isAnimated, setIsAnimated] = React.useState(false);
 
   const setIntervalRef = interval => {
     intervalRef.current = interval;
@@ -213,31 +152,16 @@ export const TestimonialWidget = React.memo(props => {
   const imageRef = React.useRef();
 
   const intervalFunction = () => {
-    const index = Number(testimonialRef.current.order) - 1;
-    const nextTestimonial = testimonials[(index + 1) % testimonials.length];
-    console.log(
-      "index",
-      index,
-      "next testimonial",
-      nextTestimonial,
-      testimonials
-    );
+    const index = Number(testimonialRef?.current?.order) - 1;
+    const nextTestimonial =
+      jsonData?.testimonials[(index + 1) % jsonData?.testimonials?.length];
     setTestimonialRef(nextTestimonial);
   };
-  React.useEffect(() => {
-    const interval = setInterval(intervalFunction, animationTime);
-    console.log("THE INTERVAL TO STORE", interval);
-    setIntervalRef(interval);
-    return () => {
-      clearInterval(interval);
-      setIntervalRef(null);
-    };
-  }, []);
+
   const handleLogoClick = testimonial => {
     if (testimonialToStopOn?.name) {
       return false;
     }
-    console.log("THIS LOGO WAS CLICKED", testimonial, intervalRef.current);
     clearInterval(intervalRef.current);
     // cycleThroughTestimonials(testimonial);
     // TODO: wait 20s or so before restarting interval
@@ -247,14 +171,16 @@ export const TestimonialWidget = React.memo(props => {
   };
 
   const cycleThroughTestimonials = targetTestimonial => {
-    const from = testimonials.findIndex(
+    const from = jsonData?.testimonials.findIndex(
       t => t.name === selectedTestimonial.name
     );
-    const to = testimonials.findIndex(t => t.name === targetTestimonial.name);
+    const to = jsonData?.testimonials.findIndex(
+      t => t.name === targetTestimonial.name
+    );
     const distanceToNextTestimonial = distanceBetweenIndices({
       from,
       to,
-      length: testimonials.length
+      length: jsonData?.testimonials.length
     });
     console.log("FROM TO DIST", from, to, distanceToNextTestimonial);
     if (distanceToNextTestimonial === 0) {
@@ -268,12 +194,24 @@ export const TestimonialWidget = React.memo(props => {
   };
 
   React.useEffect(() => {
+    setIsAnimated(false);
+    setIsAnimated(true);
     console.log("ADJUSTING THE REF?", imageRef.current);
     imageRef.current.style.opacity = 0;
     setTimeout(() => {
       imageRef.current.style.opacity = 1;
-    }, 500);
+    }, 100);
   }, [selectedTestimonial]);
+
+  React.useEffect(() => {
+    setTestimonialRef(jsonData?.testimonials[0]);
+    const interval = setInterval(intervalFunction, animationTime);
+    setIntervalRef(interval);
+    return () => {
+      clearInterval(interval);
+      setIntervalRef(null);
+    };
+  }, [jsonData]);
 
   const handleImageMouseOver = () => {
     setIsHovered(true);
@@ -293,39 +231,50 @@ export const TestimonialWidget = React.memo(props => {
           src={selectedTestimonial?.background_image_url}
           ref={imageRef}
         ></StyledImage>
-        <StyledImageMask
-          gradientColor={selectedTestimonial?.gradient_color}
-          isHovered={isHovered}
-        >
-          <StyledImageTitle>{selectedTestimonial?.name}</StyledImageTitle>
-          <StyledImageCaption isHovered={isHovered}>
-            <StyledImageSubheader>
-              {selectedTestimonial?.headline_text}
-            </StyledImageSubheader>
-            <StyledCapsuleContainer>
-              <IconCapsule
-                icon={geoIcon}
-                text={selectedTestimonial?.left_bubble_text}
-              />
-              <IconCapsule
-                icon={peopleIcon}
-                text={selectedTestimonial?.right_bubble_text}
-              />
-            </StyledCapsuleContainer>
-            <StyledHiddenContainer isHovered={isHovered}>
-              <StyledHiddenText>Request an event like this</StyledHiddenText>
-              <LottieArrow isMousedOver={isHovered} />
-            </StyledHiddenContainer>
-          </StyledImageCaption>
-          <StyledMaskMask
-            isHovered={isHovered}
-            gradientColor={selectedTestimonial?.gradient_color}
-          ></StyledMaskMask>
-        </StyledImageMask>
+        <Transition in={isAnimated} timeout={100}>
+          {state => {
+            return (
+              <StyledImageMask
+                gradientColor={selectedTestimonial?.gradient_color}
+                isHovered={isHovered}
+                transformValue={transitions[state]?.transformValue}
+              >
+                <StyledImageTitle
+                  src={selectedTestimonial?.logo_url}
+                ></StyledImageTitle>
+                <StyledImageCaption isHovered={isHovered}>
+                  <StyledImageSubheader>
+                    {selectedTestimonial?.headline_text}
+                  </StyledImageSubheader>
+                  <StyledCapsuleContainer>
+                    <IconCapsule
+                      icon={geoIcon}
+                      text={selectedTestimonial?.left_bubble_text}
+                    />
+                    <IconCapsule
+                      icon={peopleIcon}
+                      text={selectedTestimonial?.right_bubble_text}
+                    />
+                  </StyledCapsuleContainer>
+                  <StyledHiddenContainer isHovered={isHovered}>
+                    <StyledHiddenText>
+                      Request an event like this
+                    </StyledHiddenText>
+                    <LottieArrow isMousedOver={isHovered} isWhite />
+                  </StyledHiddenContainer>
+                </StyledImageCaption>
+                <StyledMaskMask
+                  isHovered={isHovered}
+                  gradientColor={selectedTestimonial?.gradient_color}
+                ></StyledMaskMask>
+              </StyledImageMask>
+            );
+          }}
+        </Transition>
       </StyledImageContainer>
       <StyledSelectionContainer>
         <LogoSelector
-          testimonials={testimonials}
+          testimonials={jsonData?.testimonials}
           onLogoClick={handleLogoClick}
           selectedTestimonial={selectedTestimonial}
           animationTime={animationTime}

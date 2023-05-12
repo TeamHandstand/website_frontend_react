@@ -33,13 +33,13 @@ const StyledRightColumn = styled.div`
 `;
 
 export const StickyImageDisplay = React.memo(props => {
-  const { stickyImage, images = [] } = props;
+  const { jsonData } = props;
   return (
     <StyledContainer>
       <StyledLeftColumn>
         <ImageCardWithScrollText
-          title={"Born from fun"}
-          imageUrl={"https://picsum.photos/id/237/600/500"}
+          title={jsonData?.handstand_birth?.sticky_image?.title}
+          imageUrl={jsonData?.handstand_birth?.sticky_image?.image_url}
           linesOfDescription={[
             "Our first event was a side project in 2014.",
             "We've since launched a national event",
@@ -48,13 +48,14 @@ export const StickyImageDisplay = React.memo(props => {
         />
       </StyledLeftColumn>
       <StyledRightColumn>
-        {images.map(image => {
+        {jsonData?.handstand_birth?.scrolly_images?.map(image => {
           return (
             <ImageCardWithDescription
+              key={image?.title}
               title={image?.title}
-              description={image?.description}
-              imageUrl={image?.imageUrl}
-              gradientColor={image?.gradientColor}
+              description={image?.subtitle}
+              imageUrl={image?.image_url}
+              gradientColor={image?.gradient_color}
             />
           );
         })}

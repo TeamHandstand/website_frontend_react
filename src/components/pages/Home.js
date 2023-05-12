@@ -58,6 +58,26 @@ const StyledCountContainer = styled.div`
 `;
 
 export const Home = React.memo(props => {
+  const [jsonData, setJsonData] = React.useState({
+    testimonials: [],
+    handstand_birth: {
+      sticky_image: {},
+      scrolly_images: []
+    }
+  });
+  React.useEffect(() => {
+    const fetchJsonData = async () => {
+      const response = await fetch(
+        "https://s3.us-west-1.amazonaws.com/assets.handstandwith.us/web/content_controls/website_controls.json"
+      );
+      const json = await response?.json();
+      console.log("RESULTS FROM FETCH", json);
+      if (!response.error && json) {
+        setJsonData(json);
+      }
+    };
+    fetchJsonData();
+  }, []);
   const firstLinks = [
     {
       header: "Company Events",
@@ -66,7 +86,7 @@ export const Home = React.memo(props => {
       url: ""
     },
     {
-      header: "Public Game",
+      header: "Public Games",
       content:
         "Play in The SF Hunt: a 12 hour, 100 riddle experience you shouldn’t miss.",
       url: ""
@@ -87,7 +107,7 @@ export const Home = React.memo(props => {
       url: ""
     },
     {
-      header: "Public Game",
+      header: "Public Games",
       content:
         "Play in The SF Hunt: a 12 hour, 100 riddle experience you shouldn’t miss.",
       url: ""
@@ -100,51 +120,6 @@ export const Home = React.memo(props => {
     }
   ];
 
-  const images = [
-    {
-      imageUrl: "https://picsum.photos/id/238/600/400",
-      title: "Test Title 1",
-      description:
-        "Here is a description of what's going on here. Fascinating.",
-      gradientColor: "blue"
-    },
-    {
-      imageUrl: "https://picsum.photos/id/239/600/400",
-      title: "Test Title 15",
-      description:
-        "Here is a description of what's going on here. Fascinating.",
-      gradientColor: "yellow"
-    },
-    {
-      imageUrl: "https://picsum.photos/id/240/600/400",
-      title: "Test Title 19",
-      description:
-        "Here is a description of what's going on here. Fascinating.",
-      gradientColor: "red"
-    },
-    {
-      imageUrl: "https://picsum.photos/id/241/600/400",
-      title: "Test Title 12",
-      description:
-        "Here is a description of what's going on here. Fascinating.",
-      gradientColor: "green"
-    },
-    {
-      imageUrl: "https://picsum.photos/id/242/600/400",
-      title: "Test Title 2",
-      description:
-        "Here is a description of what's going on here. Fascinating.",
-      gradientColor: "blue"
-    },
-    {
-      imageUrl: "https://picsum.photos/id/243/600/400",
-      title: "Test Title 3",
-      description:
-        "Here is a description of what's going on here. Fascinating.",
-      gradientColor: "yellow"
-    }
-  ];
-
   return (
     <StyledContainer>
       <Header />
@@ -153,9 +128,9 @@ export const Home = React.memo(props => {
       </StyledBackgroundContainer>
       <StyledContentContainer>
         <LinkList links={firstLinks} />
-        <TestimonialCard />
+        <TestimonialCard jsonData={jsonData} />
         <StyledStickyContainer>
-          <StickyImageDisplay images={images} />
+          <StickyImageDisplay jsonData={jsonData} />
         </StyledStickyContainer>
         <StyledCountContainer>
           <CountCard />

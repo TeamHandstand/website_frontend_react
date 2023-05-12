@@ -4,6 +4,7 @@ import { Subheader } from "../text/Subheader";
 import { Text } from "../text/Text";
 import { LottieArrow } from "./LottieArrow";
 import { CustomLink } from "./CustomLink";
+import { colors } from "../../styles.js/colors";
 const StyledContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -15,6 +16,11 @@ const TextContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 50px;
+`;
+const StyledLottieContainer = styled.div`
+  background-color: ${colors.main};
+  border-radius: 50%;
+  padding: 1px;
 `;
 export const LinkLine = React.memo(props => {
   const { header, content, url } = props;
@@ -37,7 +43,9 @@ export const LinkLine = React.memo(props => {
           <Subheader content={header} />
           <Text content={content} />
         </TextContainer>
-        <LottieArrow isMousedOver={isMousedOver} />
+        <StyledLottieContainer>
+          <LottieArrow isMousedOver={isMousedOver} isWhite />
+        </StyledLottieContainer>
       </StyledContainer>
     </CustomLink>
   );
