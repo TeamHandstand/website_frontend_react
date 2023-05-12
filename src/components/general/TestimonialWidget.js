@@ -8,10 +8,15 @@ import peopleIcon from "../../images/icons/case-study-icon-people.svg";
 import { distanceBetweenIndices } from "../../helpers/distanceBetweenIndices";
 import { LottieArrow } from "./LottieArrow";
 import { Transition } from "react-transition-group";
+import { breakpoints } from "../../styles.js/breakpoints";
+
+const containerWidth = 1000;
+const containerWidthMobile = 400;
 const StyledContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 30px;
+  width: 100%;
 `;
 const StyledImageContainer = styled.div`
   position: relative;
@@ -71,12 +76,25 @@ const StyledImageSubheader = styled.div`
   margin-bottom: 16px;
   max-width: 650px;
 `;
-const StyledImageMask = styled.div`
+
+const StyledImageMaskContainer = styled.div`
+  overflow: hidden;
+  transition: transform 1s;
+  transform: translateX(
+    ${props =>
+      -100 *
+      ((parseInt(props.selectedTestimonial?.order) - 1) /
+        props.numTestimonials)}%
+  );
+  display: flex;
   position: absolute;
-  width: 100%;
   height: 100%;
   top: 0;
   left: 0;
+  width: ${props => props.containerWidth * props.numTestimonials}px;
+`;
+const StyledImageMask = styled.div`
+  width: ${props => 100 / props.numTestimonials}%;
   background: linear-gradient(
     to bottom,
     ${props => hexToRgba({ hex: props.gradientColor, a: 0.42 })} 0%,
@@ -86,6 +104,7 @@ const StyledImageMask = styled.div`
   );
   transition: opacity 0.3s, transform 1s;
   color: white;
+  position: relative;
 `;
 
 const StyledMaskMask = styled.div`
@@ -159,10 +178,10 @@ export const TestimonialWidget = React.memo(props => {
 
   const cycleThroughTestimonials = targetTestimonial => {
     const from = jsonData?.testimonials.findIndex(
-      t => t.name === selectedTestimonial.name
+      t => t?.name === selectedTestimonial?.name
     );
     const to = jsonData?.testimonials.findIndex(
-      t => t.name === targetTestimonial.name
+      t => t?.name === targetTestimonial?.name
     );
     const distanceToNextTestimonial = distanceBetweenIndices({
       from,
@@ -181,9 +200,6 @@ export const TestimonialWidget = React.memo(props => {
   };
 
   React.useEffect(() => {
-    setIsAnimated(false);
-    setIsAnimated(true);
-    console.log("ADJUSTING THE REF?", imageRef.current);
     imageRef.current.style.opacity = 0;
     setTimeout(() => {
       imageRef.current.style.opacity = 1;
@@ -208,8 +224,9 @@ export const TestimonialWidget = React.memo(props => {
     setIsHovered(false);
   };
 
+  const containerRef = React.useRef();
   return (
-    <StyledContainer>
+    <StyledContainer ref={containerRef}>
       <StyledImageContainer
         onMouseOver={handleImageMouseOver}
         onMouseOut={handleImageMouseOut}
@@ -218,37 +235,51 @@ export const TestimonialWidget = React.memo(props => {
           src={selectedTestimonial?.background_image_url}
           ref={imageRef}
         ></StyledImage>
-        <StyledImageMask
-          gradientColor={selectedTestimonial?.gradient_color}
-          isHovered={isHovered}
+        <StyledImageMaskContainer
+          numTestimonials={props?.jsonData?.testimonials?.length}
+          selectedTestimonial={selectedTestimonial}
+          containerWidth={containerRef?.current?.offsetWidth}
         >
-          <StyledImageTitle
-            src={selectedTestimonial?.logo_url}
-          ></StyledImageTitle>
-          <StyledImageCaption isHovered={isHovered}>
-            <StyledImageSubheader>
-              {selectedTestimonial?.headline_text}
-            </StyledImageSubheader>
-            <StyledCapsuleContainer>
-              <IconCapsule
-                icon={geoIcon}
-                text={selectedTestimonial?.left_bubble_text}
-              />
-              <IconCapsule
-                icon={peopleIcon}
-                text={selectedTestimonial?.right_bubble_text}
-              />
-            </StyledCapsuleContainer>
-            <StyledHiddenContainer isHovered={isHovered}>
-              <StyledHiddenText>Request an event like this</StyledHiddenText>
-              <LottieArrow isMousedOver={isHovered} isWhite />
-            </StyledHiddenContainer>
-          </StyledImageCaption>
-          <StyledMaskMask
-            isHovered={isHovered}
-            gradientColor={selectedTestimonial?.gradient_color}
-          ></StyledMaskMask>
-        </StyledImageMask>
+          {props?.jsonData?.testimonials?.map((testimonial, index) => {
+            return (
+              <StyledImageMask
+                gradientColor={testimonial?.gradient_color}
+                isHovered={isHovered}
+                testimonialIndex={index}
+                numTestimonials={props?.jsonData?.testimonials?.length}
+              >
+                <StyledImageTitle
+                  src={testimonial?.logo_url}
+                ></StyledImageTitle>
+                <StyledImageCaption isHovered={isHovered}>
+                  <StyledImageSubheader>
+                    {testimonial?.headline_text}
+                  </StyledImageSubheader>
+                  <StyledCapsuleContainer>
+                    <IconCapsule
+                      icon={geoIcon}
+                      text={testimonial?.left_bubble_text}
+                    />
+                    <IconCapsule
+                      icon={peopleIcon}
+                      text={testimonial?.right_bubble_text}
+                    />
+                  </StyledCapsuleContainer>
+                  <StyledHiddenContainer isHovered={isHovered}>
+                    <StyledHiddenText>
+                      Request an event like this
+                    </StyledHiddenText>
+                    <LottieArrow isMousedOver={isHovered} isWhite />
+                  </StyledHiddenContainer>
+                </StyledImageCaption>
+                <StyledMaskMask
+                  isHovered={isHovered}
+                  gradientColor={testimonial?.gradient_color}
+                ></StyledMaskMask>
+              </StyledImageMask>
+            );
+          })}
+        </StyledImageMaskContainer>
       </StyledImageContainer>
       <StyledSelectionContainer>
         <LogoSelector
