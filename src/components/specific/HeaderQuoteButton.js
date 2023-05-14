@@ -9,7 +9,7 @@ const StyledContainer = styled.button`
   background-color: ${props =>
     props.isRevealed ? colors.main : "transparent"};
   border: none;
-  color: ${props => (props.isRevealed ? "black" : "white")};
+  color: white;
   font-weight: bold;
   font-size: 18px;
   cursor: pointer;

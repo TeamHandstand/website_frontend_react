@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { ScrollText } from "./ScrollText";
+import { Header } from "../text/Header";
 const StyledContainer = styled.div`
   position: relative;
   border-radius: 13px;
   width: 100%;
   background-color: white;
   overflow: hidden;
+  height: 90vh;
 `;
 const StyledImageContainer = styled.div`
   width: 100%;
@@ -50,7 +52,9 @@ export const ImageCardWithScrollText = React.memo(props => {
   const { imageUrl, title, linesOfDescription } = props;
   return (
     <StyledContainer>
-      <StyledTitle>{title}</StyledTitle>
+      <StyledTitle>
+        <Header>{title}</Header>
+      </StyledTitle>
       <StyledImageContainer>
         <StyledTopImageMask />
         <StyledImage src={imageUrl} />

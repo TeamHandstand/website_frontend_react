@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { colors } from "../../styles.js/colors";
+import { Header } from "../text/Header";
 const StyledImageContainer = styled.div`
   position: absolute;
   width: 100%;
@@ -16,6 +17,7 @@ const StyledContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0px 0px 30px 0px;
 `;
 
 const StyledTextContainer = styled.div`
@@ -39,9 +41,8 @@ const StyledSubheader = styled.div`
   text-align: left;
 `;
 
-const StyledImage = styled.img`
+const StyledImage = styled.video`
   flex-shrink: 0;
-  min-width: 100%;
   min-height: 100%;
 `;
 
@@ -53,8 +54,8 @@ export const HeroBackground = React.memo(props => {
     const currentScrollTop =
       window?.pageYOffset || document?.documentElement?.scrollTop;
     let opacity = 1;
-    let lowerBound = 300;
-    let upperBound = 700;
+    let lowerBound = 0;
+    let upperBound = 400;
     if (currentScrollTop > lowerBound) {
       if (currentScrollTop > upperBound) {
         opacity = 0;
@@ -77,10 +78,12 @@ export const HeroBackground = React.memo(props => {
   return (
     <StyledContainer>
       <StyledImageContainer opacity={opacity}>
-        <StyledImage src={imageUrl} />
+        <StyledImage src={imageUrl} autoPlay muted loop />
       </StyledImageContainer>
       <StyledTextContainer opacity={opacity}>
-        <StyledHeader>We craft experiences to make you smile</StyledHeader>
+        <StyledHeader>
+          <Header>We craft experiences to make you smile</Header>
+        </StyledHeader>
         <StyledSubheader>
           Large-scale events that bring people together and create strong
           memories.

@@ -32,6 +32,10 @@ const StyledRightColumn = styled.div`
   }
 `;
 
+const StyledCardContainer = styled.div`
+  margin-bottom: 32px;
+`;
+
 export const StickyImageDisplay = React.memo(props => {
   const { jsonData } = props;
   return (
@@ -50,13 +54,15 @@ export const StickyImageDisplay = React.memo(props => {
       <StyledRightColumn>
         {jsonData?.handstand_birth?.scrolly_images?.map(image => {
           return (
-            <ImageCardWithDescription
-              key={image?.title}
-              title={image?.title}
-              description={image?.subtitle}
-              imageUrl={image?.image_url}
-              gradientColor={image?.gradient_color}
-            />
+            <StyledCardContainer>
+              <ImageCardWithDescription
+                key={image?.title}
+                title={image?.title}
+                description={image?.subtitle}
+                imageUrl={image?.image_url}
+                gradientColor={image?.gradient_color}
+              />
+            </StyledCardContainer>
           );
         })}
       </StyledRightColumn>

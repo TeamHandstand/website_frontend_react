@@ -4,6 +4,10 @@ import { HeaderQuoteButton } from "./HeaderQuoteButton";
 import { CustomLink } from "../general/CustomLink";
 import logo from "../../images/logos/logo-handstand-header.svg";
 import { breakpoints } from "../../styles.js/breakpoints";
+import { MaxWidthContainer } from "../general/MaxWidthContainer";
+
+// TODO: use a 1s transition of background-color and font color when scrolled past the threshold.
+
 const StyledContainer = styled.div`
   position: sticky;
   top: 0;
@@ -13,6 +17,9 @@ const StyledContainer = styled.div`
   transition: 0.1s;
   z-index: 100;
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 const StyledHeader = styled.div`
   background-color: transparent;
@@ -58,7 +65,8 @@ const StyledLinkContainer = styled.div`
 const StyledButtonContainer = styled.div`
   width: 25%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: center;
   @media (max-width: ${breakpoints.medium}px) {
     width: auto;
   }
@@ -114,48 +122,52 @@ export const Header = React.memo(props => {
   }, []);
   return (
     <StyledContainer>
-      <StyledHeader maskOpacity={maskOpacity}>
-        <CustomLink to={""}>
-          <StyledLogo src={logo} strokeColor={"white"} />
-        </CustomLink>
-        <StyledLinkContainer>
-          <StyledLink>Company Events</StyledLink>
-          <StyledLink>Public Games</StyledLink>
-          <StyledLink>Play Now</StyledLink>
-          <StyledLink>About Us</StyledLink>
-        </StyledLinkContainer>
-        <StyledButtonContainer>
-          <HeaderQuoteButton
-            isRevealed={maskOpacity > 0.4}
-            opacity={maskOpacity}
-          />
-        </StyledButtonContainer>
-      </StyledHeader>
-      <StyledHeaderMask maskOpacity={maskOpacity}>
-        <CustomLink to={""}>
-          <StyledLogo src={logo} isBlack />
-        </CustomLink>
-        <StyledLinkContainer>
+      <MaxWidthContainer>
+        <StyledHeader maskOpacity={maskOpacity}>
           <CustomLink to={""}>
+            <StyledLogo src={logo} strokeColor={"white"} />
+          </CustomLink>
+          <StyledLinkContainer>
             <StyledLink>Company Events</StyledLink>
-          </CustomLink>
-          <CustomLink to={""}>
             <StyledLink>Public Games</StyledLink>
-          </CustomLink>
-          <CustomLink to={""}>
             <StyledLink>Play Now</StyledLink>
-          </CustomLink>
-          <CustomLink to={""}>
             <StyledLink>About Us</StyledLink>
+          </StyledLinkContainer>
+          <StyledButtonContainer>
+            <HeaderQuoteButton
+              isRevealed={maskOpacity > 0.4}
+              opacity={maskOpacity}
+            />
+          </StyledButtonContainer>
+        </StyledHeader>
+        {/* </MaxWidthContainer>
+        <MaxWidthContainer> */}
+        <StyledHeaderMask maskOpacity={maskOpacity}>
+          <CustomLink to={""}>
+            <StyledLogo src={logo} isBlack />
           </CustomLink>
-        </StyledLinkContainer>
-        <StyledButtonContainer>
-          <HeaderQuoteButton
-            isRevealed={maskOpacity > 0.4}
-            opacity={maskOpacity}
-          />
-        </StyledButtonContainer>
-      </StyledHeaderMask>
+          <StyledLinkContainer>
+            <CustomLink to={""}>
+              <StyledLink>Company Events</StyledLink>
+            </CustomLink>
+            <CustomLink to={""}>
+              <StyledLink>Public Games</StyledLink>
+            </CustomLink>
+            <CustomLink to={""}>
+              <StyledLink>Play Now</StyledLink>
+            </CustomLink>
+            <CustomLink to={""}>
+              <StyledLink>About Us</StyledLink>
+            </CustomLink>
+          </StyledLinkContainer>
+          <StyledButtonContainer>
+            <HeaderQuoteButton
+              isRevealed={maskOpacity > 0.4}
+              opacity={maskOpacity}
+            />
+          </StyledButtonContainer>
+        </StyledHeaderMask>
+      </MaxWidthContainer>
     </StyledContainer>
   );
 });

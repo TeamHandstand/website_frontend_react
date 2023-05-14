@@ -14,6 +14,7 @@ const StyledContainer = styled.div`
   @media (max-width: ${breakpoints.medium}px) {
     width: 95%;
   }
+  overflow: hidden;
 `;
 
 const StyledHeader = styled.div`
@@ -31,7 +32,9 @@ export const TestimonialCard = React.memo(props => {
   const { jsonData } = props;
   return (
     <StyledContainer>
-      <StyledHeader>Trusted by the Companies You Trust</StyledHeader>
+      <StyledHeader>
+        <Header>Trusted by the Companies You Trust</Header>
+      </StyledHeader>
       <StyledTextContainer>
         <ScrollText
           linesOfDescription={[

@@ -6,7 +6,10 @@ const StyledContainer = styled.div`
   position: relative;
   border-radius: 13px;
   overflow: hidden;
-  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const StyledImageWithTitle = styled.div`
@@ -29,7 +32,22 @@ const StyledTitle = styled.div`
   background: linear-gradient(
     to bottom,
     ${props => hexToRgba({ hex: props.gradientColor, a: 0.55 })} 0%,
-    ${props => hexToRgba({ hex: props.gradientColor, a: 0.2 })} 67%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0 })} 67%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0 })} 100%
+  );
+  z-index: 2;
+`;
+const StyledMask = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    to bottom,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.55 })} 0%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0 })} 67%,
     ${props => hexToRgba({ hex: props.gradientColor, a: 0 })} 100%
   );
 `;
@@ -38,12 +56,14 @@ const StyledImage = styled.img`
 `;
 const StyledDescription = styled.div`
   text-align: center;
+  width: 75%;
 `;
 export const ImageCardWithDescription = React.memo(props => {
   const { imageUrl, title, description, gradientColor } = props;
   return (
     <StyledContainer>
       <StyledImageWithTitle>
+        <StyledMask gradientColor={gradientColor}></StyledMask>
         <StyledTitle gradientColor={gradientColor}>{title}</StyledTitle>
         <StyledImage src={imageUrl} />
       </StyledImageWithTitle>

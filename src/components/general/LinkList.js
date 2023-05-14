@@ -29,7 +29,7 @@ export const LinkList = React.memo(props => {
     <StyledContainer>
       {header && (
         <StyledHeader>
-          <Header content={header} />
+          <Header>{header}</Header>
         </StyledHeader>
       )}
       {links.map((link, index) => {

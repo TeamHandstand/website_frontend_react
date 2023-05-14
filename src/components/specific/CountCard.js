@@ -104,7 +104,9 @@ export const CountCard = React.memo(props => {
       <StyledImage src={"https://picsum.photos/id/244/1200/600"}></StyledImage>
       <StyledImageOverlay>
         <StyledTextContainer>
-          <StyledHeader>We've been at this awhile</StyledHeader>
+          <StyledHeader>
+            <Header>We've been at this awhile</Header>
+          </StyledHeader>
 
           <StyledSubheader>
             Hundreds of events under our belt, and the next will be our best one

@@ -31,12 +31,12 @@ const StyledSelectionContainer = styled.div`
 const StyledImageTitle = styled.img`
   margin-left: 12px;
   margin-top: 12px;
-  width: 220px;
+  width: 140px;
   height: auto;
   filter: brightness(0) invert(1);
 `;
 const StyledImage = styled.img`
-  width: 100%;
+  width: ${props => 100 / props.numTestimonials}%;
   opacity: 1;
   transition: opacity 1s;
 `;
@@ -45,7 +45,7 @@ const StyledImageCaption = styled.div`
   bottom: 0;
   left: 0;
   transform: ${props =>
-    props.isHovered ? "translateY(-30%)" : "translateY(0)"};
+    props.isHovered ? "translateY(-15%)" : "translateY(0)"};
   transition: 0.3s;
   color: white;
   z-index: 10;
@@ -93,6 +93,20 @@ const StyledImageMaskContainer = styled.div`
   left: 0;
   width: ${props => props.containerWidth * props.numTestimonials}px;
 `;
+
+const StyledImagesContainer = styled.div`
+  overflow: hidden;
+  transition: transform 1s, opacity 0.3s linear;
+  transform: translateX(
+    ${props =>
+      -100 *
+      ((parseInt(props.selectedTestimonial?.order) - 1) /
+        props.numTestimonials)}%
+  );
+  display: flex;
+  height: 100%;
+  width: ${props => props.containerWidth * props.numTestimonials}px;
+`;
 const StyledImageMask = styled.div`
   width: ${props => 100 / props.numTestimonials}%;
   background: linear-gradient(
@@ -117,8 +131,8 @@ const StyledMaskMask = styled.div`
     to bottom,
     ${props => hexToRgba({ hex: props.gradientColor, a: 0.0 })} 0%,
     ${props => hexToRgba({ hex: props.gradientColor, a: 0.2 })} 50%,
-    ${props => hexToRgba({ hex: props.gradientColor, a: 0.6 })} 81%,
-    ${props => hexToRgba({ hex: props.gradientColor, a: 1 })} 82.2%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.66 })} 81%,
+    ${props => hexToRgba({ hex: props.gradientColor, a: 0.8 })} 82.2%,
     ${props => hexToRgba({ hex: props.gradientColor, a: 1 })} 100%
   );
   opacity: ${props => (props.isHovered ? 1 : 0)};
@@ -169,11 +183,13 @@ export const TestimonialWidget = React.memo(props => {
       return false;
     }
     clearInterval(intervalRef.current);
-    // cycleThroughTestimonials(testimonial);
-    // TODO: wait 20s or so before restarting interval
-    const interval = setInterval(intervalFunction, animationTime);
-    setIntervalRef(interval);
     setTestimonialRef(testimonial);
+    // cycleThroughTestimonials(testimonial);
+    setTimeout(() => {
+      clearInterval(intervalRef.current);
+      const interval = setInterval(intervalFunction, animationTime);
+      setIntervalRef(interval);
+    }, 20000);
   };
 
   const cycleThroughTestimonials = targetTestimonial => {
@@ -203,8 +219,8 @@ export const TestimonialWidget = React.memo(props => {
     imageRef.current.style.opacity = 0;
     setTimeout(() => {
       imageRef.current.style.opacity = 1;
-    }, 100);
-  }, [selectedTestimonial]);
+    }, 300);
+  }, [testimonialRef?.current]);
 
   React.useEffect(() => {
     setTestimonialRef(jsonData?.testimonials[0]);
@@ -231,10 +247,21 @@ export const TestimonialWidget = React.memo(props => {
         onMouseOver={handleImageMouseOver}
         onMouseOut={handleImageMouseOut}
       >
-        <StyledImage
-          src={selectedTestimonial?.background_image_url}
+        <StyledImagesContainer
+          numTestimonials={props?.jsonData?.testimonials?.length}
+          selectedTestimonial={selectedTestimonial}
+          containerWidth={containerRef?.current?.offsetWidth}
           ref={imageRef}
-        ></StyledImage>
+        >
+          {props?.jsonData?.testimonials?.map((testimonial, index) => {
+            return (
+              <StyledImage
+                src={testimonial?.background_image_url}
+                numTestimonials={props?.jsonData?.testimonials?.length}
+              ></StyledImage>
+            );
+          })}
+        </StyledImagesContainer>
         <StyledImageMaskContainer
           numTestimonials={props?.jsonData?.testimonials?.length}
           selectedTestimonial={selectedTestimonial}
@@ -257,11 +284,11 @@ export const TestimonialWidget = React.memo(props => {
                   </StyledImageSubheader>
                   <StyledCapsuleContainer>
                     <IconCapsule
-                      icon={geoIcon}
+                      icon={peopleIcon}
                       text={testimonial?.left_bubble_text}
                     />
                     <IconCapsule
-                      icon={peopleIcon}
+                      icon={geoIcon}
                       text={testimonial?.right_bubble_text}
                     />
                   </StyledCapsuleContainer>

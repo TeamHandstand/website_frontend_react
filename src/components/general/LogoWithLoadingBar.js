@@ -4,12 +4,14 @@ const StyledContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 100%;
   cursor: pointer;
   position: relative;
 `;
 const StyledLogo = styled.img`
   width: 100%;
+  max-width: 130px;
   height: auto;
   filter: ${props => (props.isSelected ? "grayscale(0)" : "grayscale(100)")};
   transition: 2s;
@@ -37,7 +39,7 @@ const StyledLoadingBarMask = styled.div`
   opacity: ${props => (props.isSelected ? 1 : 0)};
   width: ${props => props.width}px;
   transition: width
-      ${props => (props.isSelected ? props.animationTime / 1000 : 0)}s,
+      ${props => (props.isSelected ? props.animationTime / 1000 : 0)}s linear,
     opacity 1s;
 `;
 

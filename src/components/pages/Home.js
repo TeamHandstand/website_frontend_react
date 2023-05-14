@@ -8,10 +8,10 @@ import { TestimonialCard } from "../specific/TestimonialCard";
 import { CountCard } from "../specific/CountCard";
 import { Footer } from "../specific/Footer";
 
-import HeroImage from "../../images/SampleBackground.png";
 import { HeroBackground } from "../general/HeroBackground";
 import { colors } from "../../styles.js/colors";
 import { breakpoints } from "../../styles.js/breakpoints";
+import { MaxWidthContainer } from "../general/MaxWidthContainer";
 
 const StyledContainer = styled.div`
   background-color: ${colors.lightGrey};
@@ -19,7 +19,7 @@ const StyledContainer = styled.div`
 const StyledContentContainer = styled.div`
   width: 100%;
   background-color: transparent;
-  margin-top: 600px;
+  margin-top: 45vh;
   transform: translateY(0);
   display: flex;
   flex-direction: column;
@@ -57,6 +57,10 @@ const StyledCountContainer = styled.div`
   }
 `;
 
+const StyledFooterContainer = styled.div`
+  margin-top: 45px;
+  width: 100%;
+`;
 export const Home = React.memo(props => {
   const [jsonData, setJsonData] = React.useState({
     testimonials: [],
@@ -124,19 +128,36 @@ export const Home = React.memo(props => {
     <StyledContainer>
       <Header />
       <StyledBackgroundContainer>
-        <HeroBackground imageUrl={HeroImage} fadeOnScroll />
+        <HeroBackground
+          imageUrl={
+            "https://assets.handstandwith.us/web/videos/seattle-teaser-720p-new.mp4"
+          }
+          fadeOnScroll
+        />
       </StyledBackgroundContainer>
       <StyledContentContainer>
-        <LinkList links={firstLinks} />
-        <TestimonialCard jsonData={jsonData} />
-        <StyledStickyContainer>
-          <StickyImageDisplay jsonData={jsonData} />
-        </StyledStickyContainer>
-        <StyledCountContainer>
-          <CountCard />
-        </StyledCountContainer>
-        <LinkList header={"How can we help?"} links={secondLinks} />
-        <Footer />
+        <MaxWidthContainer>
+          <LinkList links={firstLinks} />
+        </MaxWidthContainer>
+        <MaxWidthContainer>
+          <TestimonialCard jsonData={jsonData} />
+        </MaxWidthContainer>
+        <MaxWidthContainer>
+          <StyledStickyContainer>
+            <StickyImageDisplay jsonData={jsonData} />
+          </StyledStickyContainer>
+        </MaxWidthContainer>
+        <MaxWidthContainer>
+          <StyledCountContainer>
+            <CountCard />
+          </StyledCountContainer>
+        </MaxWidthContainer>
+        <MaxWidthContainer>
+          <LinkList header={"How can we help?"} links={secondLinks} />
+        </MaxWidthContainer>
+        <StyledFooterContainer>
+          <Footer />
+        </StyledFooterContainer>
       </StyledContentContainer>
     </StyledContainer>
   );

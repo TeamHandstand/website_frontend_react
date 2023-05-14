@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 const StyledContainer = styled.div`
   background-color: white;
-  border: 1px solid gray;
   border-radius: 500px;
   height: 40px;
   width: 160px;
