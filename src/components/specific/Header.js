@@ -14,16 +14,17 @@ const StyledContainer = styled.div`
   left: 0;
   width: 100%;
   height: 60px;
-  transition: 0.1s;
   z-index: 100;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${props => (props.isScrolled ? "#ffffff" : "transparent")};
+  transition: 0.6s linear;
 `;
 const StyledHeader = styled.div`
   background-color: transparent;
-  color: ${props => (props.maskOpacity > 0.2 ? "black" : "white")};
+  color: ${props => (props.isScrolled ? "black" : "white")};
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -78,6 +79,7 @@ const StyledLogo = styled.img`
   margin-right: 20px;
   margin-left: 12px;
   filter: ${props => (props.isBlack ? "brightness(0) saturate(100%)" : "none")};
+  transition: 0.6s linear;
 `;
 
 export const Header = React.memo(props => {
@@ -85,6 +87,8 @@ export const Header = React.memo(props => {
     window?.pageYOffset || document?.documentElement?.scrollTop
   );
   const [maskOpacity, setMaskOpacity] = React.useState(0);
+
+  const [isScrolled, setIsScrolled] = React.useState(window?.pageYOffset > 100);
 
   const opacityRef = React.useRef(maskOpacity);
   const scrollRef = React.useRef(scrollFromTop);
@@ -101,17 +105,23 @@ export const Header = React.memo(props => {
   const scrollListener = () => {
     const currentScrollTop =
       window?.pageYOffset || document?.documentElement?.scrollTop;
-    const opacityPerPixel = 0.005;
+
     if (currentScrollTop > 100) {
-      const newOpacity = Math.min(
-        1,
-        (scrollRef.current - 100) * opacityPerPixel
-      );
-      setOpacityRef(newOpacity);
+      setIsScrolled(true);
     } else {
-      setOpacityRef(0);
+      setIsScrolled(false);
     }
-    setScrollRef(currentScrollTop);
+    // const opacityPerPixel = 0.005;
+    // if (currentScrollTop > 100) {
+    //   const newOpacity = Math.min(
+    //     1,
+    //     (scrollRef.current - 100) * opacityPerPixel
+    //   );
+    //   setOpacityRef(newOpacity);
+    // } else {
+    //   setOpacityRef(0);
+    // }
+    // setScrollRef(currentScrollTop);
   };
   React.useEffect(() => {
     document.addEventListener("scroll", scrollListener);
@@ -121,11 +131,11 @@ export const Header = React.memo(props => {
     };
   }, []);
   return (
-    <StyledContainer>
+    <StyledContainer isScrolled={isScrolled}>
       <MaxWidthContainer>
-        <StyledHeader maskOpacity={maskOpacity}>
+        <StyledHeader maskOpacity={maskOpacity} isScrolled={isScrolled}>
           <CustomLink to={""}>
-            <StyledLogo src={logo} strokeColor={"white"} />
+            <StyledLogo src={logo} isBlack={isScrolled} />
           </CustomLink>
           <StyledLinkContainer>
             <StyledLink>Company Events</StyledLink>
@@ -134,39 +144,9 @@ export const Header = React.memo(props => {
             <StyledLink>About Us</StyledLink>
           </StyledLinkContainer>
           <StyledButtonContainer>
-            <HeaderQuoteButton
-              isRevealed={maskOpacity > 0.4}
-              opacity={maskOpacity}
-            />
+            <HeaderQuoteButton isRevealed={isScrolled} opacity={maskOpacity} />
           </StyledButtonContainer>
         </StyledHeader>
-        {/* </MaxWidthContainer>
-        <MaxWidthContainer> */}
-        <StyledHeaderMask maskOpacity={maskOpacity}>
-          <CustomLink to={""}>
-            <StyledLogo src={logo} isBlack />
-          </CustomLink>
-          <StyledLinkContainer>
-            <CustomLink to={""}>
-              <StyledLink>Company Events</StyledLink>
-            </CustomLink>
-            <CustomLink to={""}>
-              <StyledLink>Public Games</StyledLink>
-            </CustomLink>
-            <CustomLink to={""}>
-              <StyledLink>Play Now</StyledLink>
-            </CustomLink>
-            <CustomLink to={""}>
-              <StyledLink>About Us</StyledLink>
-            </CustomLink>
-          </StyledLinkContainer>
-          <StyledButtonContainer>
-            <HeaderQuoteButton
-              isRevealed={maskOpacity > 0.4}
-              opacity={maskOpacity}
-            />
-          </StyledButtonContainer>
-        </StyledHeaderMask>
       </MaxWidthContainer>
     </StyledContainer>
   );

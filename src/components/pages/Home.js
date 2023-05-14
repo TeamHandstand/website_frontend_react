@@ -19,7 +19,7 @@ const StyledContainer = styled.div`
 const StyledContentContainer = styled.div`
   width: 100%;
   background-color: transparent;
-  margin-top: 45vh;
+  margin-top: 70vh;
   transform: translateY(0);
   display: flex;
   flex-direction: column;
