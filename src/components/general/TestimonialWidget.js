@@ -23,6 +23,7 @@ const StyledImageContainer = styled.div`
   width: 100%;
   cursor: pointer;
   overflow: hidden;
+  border-radius: 13px;
 `;
 const StyledSelectionContainer = styled.div`
   width: 100%;

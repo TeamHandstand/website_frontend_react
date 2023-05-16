@@ -8,11 +8,13 @@ const StyledContainer = styled.div`
   height: 100%;
   cursor: pointer;
   position: relative;
+  height: 66px;
 `;
 const StyledLogo = styled.img`
   width: 100%;
   max-width: 130px;
   height: auto;
+  max-height: 40px;
   filter: ${props => (props.isSelected ? "grayscale(0)" : "grayscale(100)")};
   transition: 2s;
   padding: 8px 12px;

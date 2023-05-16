@@ -42,7 +42,7 @@ export const LogoSelector = React.memo(props => {
               onLogoClick={() => handleLogoClick(testimonial)}
               animationTime={animationTime}
             />
-            {index !== testimonials?.length && <StyledDivider />}
+            {index !== testimonials?.length - 1 && <StyledDivider />}
           </LogoContainer>
         );
       })}

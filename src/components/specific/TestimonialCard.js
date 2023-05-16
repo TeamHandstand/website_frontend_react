@@ -38,8 +38,8 @@ export const TestimonialCard = React.memo(props => {
       <StyledTextContainer>
         <ScrollText
           linesOfDescription={[
-            "We've worked with hundreds of companies around the world,",
-            "But here are a few partners and their unique stories."
+            "We've worked with hundreds of companies around the world.",
+            "Here are a few partners and their unique stories."
           ]}
         />
       </StyledTextContainer>
