@@ -9,7 +9,7 @@ const StyledContainer = styled.button`
   font-weight: bold;
   opacity: 1;
   transition: opacity 0.3s;
-  border-radius: 13px;
+  border-radius: 6px;
   border: none;
   &:hover {
   }

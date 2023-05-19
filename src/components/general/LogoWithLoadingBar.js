@@ -8,13 +8,13 @@ const StyledContainer = styled.div`
   height: 100%;
   cursor: pointer;
   position: relative;
-  height: 66px;
+  height: 76px;
 `;
 const StyledLogo = styled.img`
   width: 100%;
   max-width: 130px;
   height: auto;
-  max-height: 40px;
+  max-height: 65px;
   filter: ${props => (props.isSelected ? "grayscale(0)" : "grayscale(100)")};
   transition: 2s;
   padding: 8px 12px;
@@ -22,7 +22,7 @@ const StyledLogo = styled.img`
 const StyledLoadingBarContainer = styled.div`
   width: 100%;
   position: relative;
-  height: 5px;
+  height: 2px;
 `;
 const StyledLoadingBar = styled.div`
   width: 100%;

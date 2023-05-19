@@ -67,6 +67,15 @@ export const Home = React.memo(props => {
     handstand_birth: {
       sticky_image: {},
       scrolly_images: []
+    },
+    handstand_stats_card: {
+      title: "",
+      subtitle: "",
+      image_url: "",
+      box_1: {},
+      box_2: {},
+      box_3: {},
+      box_4: {}
     }
   });
   React.useEffect(() => {
@@ -77,7 +86,18 @@ export const Home = React.memo(props => {
       const json = await response?.json();
       console.log("RESULTS FROM FETCH", json);
       if (!response.error && json) {
-        setJsonData(json);
+        const sortedData = {
+          ...json,
+          testimonials: json.testimonials.sort((a, b) => a?.order > b?.order),
+          handstand_birth: {
+            ...json.handstand_birth,
+            scrolly_images: json?.handstand_birth?.scrolly_images?.sort(
+              (a, b) => a?.order > b?.order
+            )
+          }
+        };
+        console.log("SORTED DATA", sortedData);
+        setJsonData(sortedData);
       }
     };
     fetchJsonData();
@@ -149,7 +169,7 @@ export const Home = React.memo(props => {
         </MaxWidthContainer>
         <MaxWidthContainer>
           <StyledCountContainer>
-            <CountCard />
+            <CountCard info={jsonData?.handstand_stats_card} />
           </StyledCountContainer>
         </MaxWidthContainer>
         <MaxWidthContainer>

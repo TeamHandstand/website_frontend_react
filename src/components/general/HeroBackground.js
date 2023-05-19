@@ -7,6 +7,16 @@ const StyledImageContainer = styled.div`
   height: 100%;
   top: 0;
   opacity: ${props => props.opacity};
+  transition: 0.2s;
+`;
+const StyledHazeContainer = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.15);
+  opacity: ${props => props.opacity};
+  transition: 0.2s;
 `;
 const StyledContainer = styled.div`
   width: 100%;
@@ -79,6 +89,7 @@ export const HeroBackground = React.memo(props => {
       <StyledImageContainer opacity={opacity}>
         <StyledImage src={imageUrl} autoPlay muted loop />
       </StyledImageContainer>
+      <StyledHazeContainer opacity={opacity}></StyledHazeContainer>
       <StyledTextContainer opacity={opacity}>
         <StyledHeader>
           <Header>We craft experiences to make you smile</Header>

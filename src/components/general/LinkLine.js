@@ -40,8 +40,8 @@ export const LinkLine = React.memo(props => {
         onMouseLeave={handleMouseLeave}
       >
         <TextContainer>
-          <Subheader content={header} />
-          <Text content={content} />
+          <Subheader>{header}</Subheader>
+          <Text>{content}</Text>
         </TextContainer>
         <StyledLottieContainer>
           <LottieArrow isMousedOver={isMousedOver} isWhite />

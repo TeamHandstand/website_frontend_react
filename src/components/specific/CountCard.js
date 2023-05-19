@@ -80,6 +80,7 @@ const StyledCountUp = styled.div`
   }
 `;
 export const CountCard = React.memo(props => {
+  const { info } = props;
   const initialCountValue = 12000;
   const [countValue, setCountValue] = React.useState(initialCountValue);
   const countRef = React.useRef(countValue);
@@ -101,34 +102,31 @@ export const CountCard = React.memo(props => {
   }, []);
   return (
     <StyledContainer>
-      <StyledImage src={"https://picsum.photos/id/244/1200/600"}></StyledImage>
+      <StyledImage src={info?.image_url}></StyledImage>
       <StyledImageOverlay>
         <StyledTextContainer>
           <StyledHeader>
-            <Header>We've been at this awhile</Header>
+            <Header>{info?.title}</Header>
           </StyledHeader>
 
-          <StyledSubheader>
-            Hundreds of events under our belt, and the next will be our best one
-            yet.
-          </StyledSubheader>
+          <StyledSubheader>{info?.subtitle}</StyledSubheader>
         </StyledTextContainer>
         <StyledCardContainer>
           <StyledCountCard>
-            <Subheader content={"200+"} />
-            <Text content={"Events organized"} />
+            <Subheader>{info?.box_1?.title}</Subheader>
+            <Text>{info?.box_1?.subtitle}</Text>
           </StyledCountCard>
           <StyledCountCard>
             <StyledCountUp>{countValue}</StyledCountUp>
-            <Text content={"People entertained"} />
+            <Text>{info?.box_2?.subtitle} </Text>
           </StyledCountCard>
           <StyledCountCard>
-            <Subheader content={"10 yrs"} />
-            <Text content={"Experience"} />
+            <Subheader>{info?.box_3?.title}</Subheader>
+            <Text>{info?.box_3?.subtitle}</Text>
           </StyledCountCard>
           <StyledCountCard>
-            <Subheader content={"Countless"} />
-            <Text content={"Smiles"} />
+            <Subheader>{info?.box_4?.title}</Subheader>
+            <Text>{info?.box_4?.subtitle}</Text>
           </StyledCountCard>
         </StyledCardContainer>
       </StyledImageOverlay>

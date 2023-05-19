@@ -8,6 +8,8 @@ const StyledContainer = styled.div`
   }
 `;
 export const Text = React.memo(props => {
-  const { content } = props;
-  return <StyledContainer>{content}</StyledContainer>;
+  const children = Array.isArray(props.children)
+    ? props.children
+    : [props.children];
+  return <StyledContainer>{children}</StyledContainer>;
 });

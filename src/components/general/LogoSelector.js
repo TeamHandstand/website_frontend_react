@@ -8,7 +8,7 @@ const StyledContainer = styled.div`
   margin-top: ;
 `;
 const LogoContainer = styled.div`
-  width: ${props => `100/${props?.testimonials?.length}%`};
+  width: ${props => `${100 / props.numTestimonials}%`};
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -35,7 +35,7 @@ export const LogoSelector = React.memo(props => {
     <StyledContainer>
       {testimonials.map((testimonial, index) => {
         return (
-          <LogoContainer>
+          <LogoContainer numTestimonials={testimonials?.length}>
             <LogoWithLoadingBar
               isSelected={testimonial?.name === selectedTestimonial?.name}
               testimonial={testimonial}

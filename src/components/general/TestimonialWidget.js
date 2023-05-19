@@ -32,8 +32,8 @@ const StyledSelectionContainer = styled.div`
 const StyledImageTitle = styled.img`
   margin-left: 12px;
   margin-top: 12px;
-  width: 140px;
-  height: auto;
+  width: auto;
+  max-height: 65px;
   filter: brightness(0) invert(1);
 `;
 const StyledImage = styled.img`
@@ -59,6 +59,9 @@ const StyledCapsuleContainer = styled.div`
   width: 340px;
   margin-top: 8px;
   margin-bottom: 8px;
+  @media (max-width: ${breakpoints.medium}px) {
+    margin: 0;
+  }
 `;
 const StyledHiddenContainer = styled.div`
   opacity: ${props => (props.isHovered ? "1" : "0")};
@@ -76,6 +79,9 @@ const StyledImageSubheader = styled.div`
   font-weight: bold;
   margin-bottom: 16px;
   max-width: 650px;
+  @media (max-width: ${breakpoints.medium}px) {
+    display: none;
+  }
 `;
 
 const StyledImageMaskContainer = styled.div`

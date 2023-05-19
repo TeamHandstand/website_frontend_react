@@ -14,6 +14,14 @@ const StyledImageContainer = styled.div`
   width: 100%;
   position: relative;
 `;
+//   padding: 30px 0px 30px 0px;
+//   background: linear-gradient(
+//     to bottom,
+//     rgba(255, 255, 255, 1) 0%,
+//     rgba(255, 255, 255, 0) 12.5%,
+//     rgba(255, 255, 255, 0) 68.9%,
+//     rgba(255, 255, 255, 1) 100%
+//   );
 const StyledImage = styled.img`
   width: 100%;
 `;
@@ -35,7 +43,7 @@ const StyledTopImageMask = styled.div`
   position: absolute;
   background: linear-gradient(to top, transparent, white);
   width: 100%;
-  height: 30px;
+  height: 50px;
   top: 0;
   left: 0;
 `;
@@ -43,7 +51,7 @@ const StyledBottomImageMask = styled.div`
   position: absolute;
   background: linear-gradient(to bottom, transparent, white);
   width: 100%;
-  height: 30px;
+  height: 50px;
   bottom: 0;
   left: 0;
 `;
