@@ -9,6 +9,7 @@ import { distanceBetweenIndices } from "../../helpers/distanceBetweenIndices";
 import { LottieArrow } from "./LottieArrow";
 import { Transition } from "react-transition-group";
 import { breakpoints } from "../../styles.js/breakpoints";
+import { Subheader } from "../text/Subheader";
 
 const containerWidth = 1000;
 const containerWidthMobile = 400;
@@ -75,7 +76,6 @@ const StyledHiddenText = styled.div`
   font-size: 24px;
 `;
 const StyledImageSubheader = styled.div`
-  font-size: 32px;
   font-weight: bold;
   margin-bottom: 16px;
   max-width: 650px;
@@ -114,6 +114,7 @@ const StyledImagesContainer = styled.div`
   height: 100%;
   width: ${props => props.containerWidth * props.numTestimonials}px;
 `;
+
 const StyledImageMask = styled.div`
   width: ${props => 100 / props.numTestimonials}%;
   background: linear-gradient(
@@ -164,8 +165,6 @@ export const TestimonialWidget = React.memo(props => {
   const intervalRef = React.useRef(storedInterval);
 
   const [isHovered, setIsHovered] = React.useState(false);
-
-  const [isAnimated, setIsAnimated] = React.useState(false);
 
   const setIntervalRef = interval => {
     intervalRef.current = interval;
@@ -287,7 +286,7 @@ export const TestimonialWidget = React.memo(props => {
                 ></StyledImageTitle>
                 <StyledImageCaption isHovered={isHovered}>
                   <StyledImageSubheader>
-                    {testimonial?.headline_text}
+                    <Subheader>{testimonial?.headline_text}</Subheader>
                   </StyledImageSubheader>
                   <StyledCapsuleContainer>
                     <IconCapsule

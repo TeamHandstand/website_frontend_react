@@ -22,6 +22,10 @@ const StyledLottieContainer = styled.div`
   border-radius: 50%;
   padding: 1px;
 `;
+
+const StyledSubheader = styled.div`
+  font-weight: bold;
+`;
 export const LinkLine = React.memo(props => {
   const { header, content, url } = props;
   const [isMousedOver, setIsMousedOver] = React.useState(false);
@@ -40,7 +44,9 @@ export const LinkLine = React.memo(props => {
         onMouseLeave={handleMouseLeave}
       >
         <TextContainer>
-          <Subheader>{header}</Subheader>
+          <StyledSubheader>
+            <Subheader>{header}</Subheader>
+          </StyledSubheader>
           <Text>{content}</Text>
         </TextContainer>
         <StyledLottieContainer>

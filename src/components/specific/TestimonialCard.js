@@ -4,6 +4,7 @@ import { Header } from "../text/Header";
 import { ScrollText } from "../general/ScrollText";
 import { TestimonialWidget } from "../general/TestimonialWidget";
 import { breakpoints } from "../../styles.js/breakpoints";
+import { Subheader } from "../text/Subheader";
 const StyledContainer = styled.div`
   width: 80%;
   background-color: white;
@@ -36,12 +37,14 @@ export const TestimonialCard = React.memo(props => {
         <Header>Trusted by the Companies You Trust</Header>
       </StyledHeader>
       <StyledTextContainer>
-        <ScrollText
-          linesOfDescription={[
-            "We've worked with hundreds of companies around the world.",
-            "Here are a few partners and their unique stories."
-          ]}
-        />
+        <Subheader>
+          <ScrollText
+            linesOfDescription={[
+              "We've worked with hundreds of companies around the world.",
+              "Here are a few partners and their unique stories."
+            ]}
+          />
+        </Subheader>
       </StyledTextContainer>
       <TestimonialWidget jsonData={jsonData} />
     </StyledContainer>

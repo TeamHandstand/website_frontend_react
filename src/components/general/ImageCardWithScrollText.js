@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ScrollText } from "./ScrollText";
 import { Header } from "../text/Header";
+import { Subheader } from "../text/Subheader";
 const StyledContainer = styled.div`
   position: relative;
   border-radius: 13px;
@@ -36,7 +37,6 @@ const StyledTitle = styled.div`
 `;
 const StyledScrollText = styled.div`
   padding: 2px 8px;
-  font-size: 22px;
 `;
 
 const StyledTopImageMask = styled.div`
@@ -69,7 +69,9 @@ export const ImageCardWithScrollText = React.memo(props => {
         <StyledBottomImageMask />
       </StyledImageContainer>
       <StyledScrollText>
-        <ScrollText linesOfDescription={linesOfDescription} />
+        <Subheader>
+          <ScrollText linesOfDescription={linesOfDescription} />
+        </Subheader>
       </StyledScrollText>
     </StyledContainer>
   );

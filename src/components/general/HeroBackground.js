@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { colors } from "../../styles.js/colors";
 import { Header } from "../text/Header";
+import { Subheader } from "../text/Subheader";
 const StyledImageContainer = styled.div`
   position: absolute;
   height: 100%;
@@ -46,7 +47,6 @@ const StyledHeader = styled.div`
 `;
 
 const StyledSubheader = styled.div`
-  font-size: 30px;
   text-align: left;
 `;
 
@@ -95,8 +95,10 @@ export const HeroBackground = React.memo(props => {
           <Header>We craft experiences to make you smile</Header>
         </StyledHeader>
         <StyledSubheader>
-          Large-scale events that bring people together and create strong
-          memories.
+          <Subheader>
+            Large-scale events that bring people together and create strong
+            memories.
+          </Subheader>
         </StyledSubheader>
       </StyledTextContainer>
     </StyledContainer>

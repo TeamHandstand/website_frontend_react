@@ -4,7 +4,8 @@ import { Header } from "../text/Header";
 import { Text } from "../text/Text";
 import { Subheader } from "../text/Subheader";
 import { breakpoints } from "../../styles.js/breakpoints";
-
+import { isInViewport } from "../../helpers/isInViewport";
+import { CountUpAnimation } from "../general/CountUpAnimation";
 const StyledContainer = styled.div`
   position: relative;
   width: 100%;
@@ -38,7 +39,6 @@ const StyledHeader = styled.div`
 `;
 
 const StyledSubheader = styled.div`
-  font-size: 22px;
   font-weight: normal;
   @media (max-width: ${breakpoints.medium}px) {
     font-size: 18px;
@@ -82,17 +82,15 @@ const StyledCountUp = styled.div`
 export const CountCard = React.memo(props => {
   const { info } = props;
   const initialCountValue = 12000;
-  const [countValue, setCountValue] = React.useState(initialCountValue);
-  const countRef = React.useRef(countValue);
-  const setCountRef = count => {
-    setCountValue(count);
-    countRef.current = count;
-  };
+  const [isInView, setIsInView] = React.useState(false);
+  const countRef = React.useRef();
+
   const scrollHandler = () => {
-    const currentScrollTop =
-      window?.pageYOffset || document?.documentElement?.scrollTop;
-    const additionalCount = parseInt(currentScrollTop / 3);
-    setCountRef(initialCountValue + additionalCount);
+    if (isInViewport(countRef?.current)) {
+      setIsInView(true);
+    } else {
+      setIsInView(false);
+    }
   };
   React.useEffect(() => {
     document?.addEventListener("scroll", scrollHandler);
@@ -100,6 +98,7 @@ export const CountCard = React.memo(props => {
       document?.removeEventListener("scroll", scrollHandler);
     };
   }, []);
+
   return (
     <StyledContainer>
       <StyledImage src={info?.image_url}></StyledImage>
@@ -109,7 +108,9 @@ export const CountCard = React.memo(props => {
             <Header>{info?.title}</Header>
           </StyledHeader>
 
-          <StyledSubheader>{info?.subtitle}</StyledSubheader>
+          <StyledSubheader>
+            <Subheader>{info?.subtitle}</Subheader>
+          </StyledSubheader>
         </StyledTextContainer>
         <StyledCardContainer>
           <StyledCountCard>
@@ -117,7 +118,15 @@ export const CountCard = React.memo(props => {
             <Text>{info?.box_1?.subtitle}</Text>
           </StyledCountCard>
           <StyledCountCard>
-            <StyledCountUp>{countValue}</StyledCountUp>
+            <StyledCountUp ref={countRef}>
+              <CountUpAnimation
+                initialValue={initialCountValue}
+                isCounting={isInView}
+              >
+                {info?.box_2?.count_up_value}
+              </CountUpAnimation>
+              +
+            </StyledCountUp>
             <Text>{info?.box_2?.subtitle} </Text>
           </StyledCountCard>
           <StyledCountCard>

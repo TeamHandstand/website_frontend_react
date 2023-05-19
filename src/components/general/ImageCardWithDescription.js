@@ -23,7 +23,7 @@ const StyledTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 0;
+  top: 8px;
   left: 0;
   text-align: center;
   font-size: 24px;
