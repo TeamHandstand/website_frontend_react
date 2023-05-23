@@ -29,23 +29,29 @@ const StyledTextContainer = styled.div`
   font-size: 32px;
   margin-bottom: 18px;
 `;
+
+const StyledText = styled.div`
+  padding: 0px 16px;
+`;
 export const TestimonialCard = React.memo(props => {
   const { jsonData } = props;
   return (
     <StyledContainer>
-      <StyledHeader>
-        <Header>Trusted by the Companies You Trust</Header>
-      </StyledHeader>
-      <StyledTextContainer>
-        <Subheader>
-          <ScrollText
-            linesOfDescription={[
-              "We've worked with hundreds of companies around the world.",
-              "Here are a few partners and their unique stories."
-            ]}
-          />
-        </Subheader>
-      </StyledTextContainer>
+      <StyledText>
+        <StyledHeader>
+          <Header>Trusted by the Companies You Trust</Header>
+        </StyledHeader>
+        <StyledTextContainer>
+          <Subheader>
+            <ScrollText
+              linesOfDescription={[
+                "We've worked with hundreds of companies around the world.",
+                "Here are a few partners and their unique stories."
+              ]}
+            />
+          </Subheader>
+        </StyledTextContainer>
+      </StyledText>
       <TestimonialWidget jsonData={jsonData} />
     </StyledContainer>
   );

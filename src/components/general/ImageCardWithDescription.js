@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { hexToRgba } from "../../helpers/hexToRgba";
+import { Text } from "../text/Text";
 const StyledContainer = styled.div`
   width: 100%;
   position: relative;
@@ -23,7 +24,7 @@ const StyledTitle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 8px;
+  top: 0;
   left: 0;
   text-align: center;
   font-size: 24px;
@@ -36,6 +37,7 @@ const StyledTitle = styled.div`
     ${props => hexToRgba({ hex: props.gradientColor, a: 0 })} 100%
   );
   z-index: 2;
+  padding-top: 14px;
 `;
 const StyledMask = styled.div`
   position: absolute;
@@ -67,7 +69,9 @@ export const ImageCardWithDescription = React.memo(props => {
         <StyledTitle gradientColor={gradientColor}>{title}</StyledTitle>
         <StyledImage src={imageUrl} />
       </StyledImageWithTitle>
-      <StyledDescription>{description}</StyledDescription>
+      <StyledDescription>
+        <Text>{description}</Text>
+      </StyledDescription>
     </StyledContainer>
   );
 });

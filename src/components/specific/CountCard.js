@@ -79,6 +79,19 @@ const StyledCountUp = styled.div`
     font-size: 16px;
   }
 `;
+
+const StyledReadabilityOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.15);
+`;
+
+const BoldText = styled.div`
+  font-weight: bold;
+`;
 export const CountCard = React.memo(props => {
   const { info } = props;
   const initialCountValue = 12000;
@@ -102,6 +115,7 @@ export const CountCard = React.memo(props => {
   return (
     <StyledContainer>
       <StyledImage src={info?.image_url}></StyledImage>
+      <StyledReadabilityOverlay />
       <StyledImageOverlay>
         <StyledTextContainer>
           <StyledHeader>
@@ -114,7 +128,9 @@ export const CountCard = React.memo(props => {
         </StyledTextContainer>
         <StyledCardContainer>
           <StyledCountCard>
-            <Subheader>{info?.box_1?.title}</Subheader>
+            <BoldText>
+              <Subheader>{info?.box_1?.title}</Subheader>
+            </BoldText>
             <Text>{info?.box_1?.subtitle}</Text>
           </StyledCountCard>
           <StyledCountCard>
@@ -130,11 +146,15 @@ export const CountCard = React.memo(props => {
             <Text>{info?.box_2?.subtitle} </Text>
           </StyledCountCard>
           <StyledCountCard>
-            <Subheader>{info?.box_3?.title}</Subheader>
+            <BoldText>
+              <Subheader>{info?.box_3?.title}</Subheader>
+            </BoldText>
             <Text>{info?.box_3?.subtitle}</Text>
           </StyledCountCard>
           <StyledCountCard>
-            <Subheader>{info?.box_4?.title}</Subheader>
+            <BoldText>
+              <Subheader>{info?.box_4?.title}</Subheader>
+            </BoldText>
             <Text>{info?.box_4?.subtitle}</Text>
           </StyledCountCard>
         </StyledCardContainer>

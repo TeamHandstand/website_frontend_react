@@ -31,8 +31,8 @@ const StyledSelectionContainer = styled.div`
   margin-top: 20px;
 `;
 const StyledImageTitle = styled.img`
-  margin-left: 12px;
-  margin-top: 12px;
+  margin-left: 30px;
+  margin-top: 30px;
   width: auto;
   max-height: 65px;
   filter: brightness(0) invert(1);
@@ -51,7 +51,7 @@ const StyledImageCaption = styled.div`
   transition: 0.3s;
   color: white;
   z-index: 10;
-  margin-left: 12px;
+  margin-left: 26px;
 `;
 
 const StyledCapsuleContainer = styled.div`
