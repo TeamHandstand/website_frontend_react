@@ -28,5 +28,5 @@ export const CountUpAnimation = ({
     }
   }, [isCounting]);
 
-  return Math.floor(count);
+  return Math.floor(count).toLocaleString();
 };

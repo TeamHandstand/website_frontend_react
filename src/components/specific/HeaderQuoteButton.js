@@ -15,7 +15,7 @@ const StyledContainer = styled.button`
   cursor: pointer;
   opacity: 1;
   &:hover {
-    opacity: 0.7;
+    background-color: ${colors.mainDark};
   }
   transition: 0.3s;
 `;

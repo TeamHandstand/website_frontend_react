@@ -39,9 +39,11 @@ const StyledLoadingBarMask = styled.div`
   height: 100%;
   background-color: ${props => props?.testimonial?.gradient_color};
   opacity: ${props => (props.isSelected ? 1 : 0)};
-  width: ${props => props.width}px;
+  width: ${props => (props.isPaused ? "100%" : `${props.width}px`)};
   transition: width
-      ${props => (props.isSelected ? props.animationTime / 1000 : 0)}s linear,
+      ${props =>
+        props.isPaused ? 0 : props.isSelected ? props.animationTime / 1000 : 0}s
+      linear,
     opacity 1s;
 `;
 
@@ -54,7 +56,13 @@ const StyledPositionContainer = styled.div`
 `;
 
 export const LogoWithLoadingBar = React.memo(props => {
-  const { testimonial, isSelected, onLogoClick, animationTime } = props;
+  const {
+    testimonial,
+    isSelected,
+    onLogoClick,
+    animationTime,
+    isPaused
+  } = props;
   const containerRef = React.useRef();
   const [width, setWidth] = React.useState(0);
   React.useEffect(() => {
@@ -64,7 +72,7 @@ export const LogoWithLoadingBar = React.memo(props => {
     } else {
       setWidth(0);
     }
-  }, [isSelected]);
+  }, [isSelected, isPaused]);
   return (
     <StyledContainer onClick={onLogoClick} ref={containerRef}>
       <StyledPositionContainer>
@@ -78,6 +86,7 @@ export const LogoWithLoadingBar = React.memo(props => {
             testimonial={testimonial}
             isSelected={isSelected}
             animationTime={animationTime}
+            isPaused={isPaused}
           ></StyledLoadingBarMask>
         </StyledLoadingBarContainer>
       </StyledPositionContainer>

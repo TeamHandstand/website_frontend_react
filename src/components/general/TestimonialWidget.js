@@ -166,6 +166,8 @@ export const TestimonialWidget = React.memo(props => {
 
   const [isHovered, setIsHovered] = React.useState(false);
 
+  const [isPaused, setIsPaused] = React.useState(false);
+
   const setIntervalRef = interval => {
     intervalRef.current = interval;
     setStoredInterval(interval);
@@ -189,12 +191,14 @@ export const TestimonialWidget = React.memo(props => {
       return false;
     }
     clearInterval(intervalRef.current);
+    setIsPaused(true);
     setTestimonialRef(testimonial);
     // cycleThroughTestimonials(testimonial);
     setTimeout(() => {
       clearInterval(intervalRef.current);
       const interval = setInterval(intervalFunction, animationTime);
       setIntervalRef(interval);
+      setIsPaused(false);
     }, 20000);
   };
 
@@ -316,6 +320,7 @@ export const TestimonialWidget = React.memo(props => {
       </StyledImageContainer>
       <StyledSelectionContainer>
         <LogoSelector
+          isPaused={isPaused}
           testimonials={jsonData?.testimonials}
           onLogoClick={handleLogoClick}
           selectedTestimonial={selectedTestimonial}

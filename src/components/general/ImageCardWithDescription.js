@@ -38,6 +38,7 @@ const StyledTitle = styled.div`
   );
   z-index: 2;
   padding-top: 14px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 `;
 const StyledMask = styled.div`
   position: absolute;
@@ -55,6 +56,7 @@ const StyledMask = styled.div`
 `;
 const StyledImage = styled.img`
   width: 100%;
+  border-radius: 13px;
 `;
 const StyledDescription = styled.div`
   text-align: center;

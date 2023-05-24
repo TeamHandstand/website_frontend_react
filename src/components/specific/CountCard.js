@@ -86,7 +86,11 @@ const StyledReadabilityOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.15);
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0) 45%
+  );
 `;
 
 const BoldText = styled.div`
@@ -94,7 +98,6 @@ const BoldText = styled.div`
 `;
 export const CountCard = React.memo(props => {
   const { info } = props;
-  const initialCountValue = 12000;
   const [isInView, setIsInView] = React.useState(false);
   const countRef = React.useRef();
 
@@ -112,6 +115,36 @@ export const CountCard = React.memo(props => {
     };
   }, []);
 
+  const parseNumber = value => {
+    if (isNaN(value)) return value;
+    return value.toLocaleString();
+  };
+
+  const buildWrapper = box => {
+    if (box.count_up_value) {
+      return (
+        <StyledCountCard>
+          <StyledCountUp ref={countRef}>
+            <CountUpAnimation isCounting={isInView}>
+              {box.count_up_value}
+            </CountUpAnimation>
+            +
+          </StyledCountUp>
+          <Text>{box.subtitle} </Text>
+        </StyledCountCard>
+      );
+    } else {
+      return (
+        <StyledCountCard>
+          <BoldText>
+            <Subheader>{parseNumber(box.title)}</Subheader>
+          </BoldText>
+          <Text>{box.subtitle}</Text>
+        </StyledCountCard>
+      );
+    }
+  };
+
   return (
     <StyledContainer>
       <StyledImage src={info?.image_url}></StyledImage>
@@ -126,37 +159,11 @@ export const CountCard = React.memo(props => {
             <Subheader>{info?.subtitle}</Subheader>
           </StyledSubheader>
         </StyledTextContainer>
-        <StyledCardContainer>
-          <StyledCountCard>
-            <BoldText>
-              <Subheader>{info?.box_1?.title}</Subheader>
-            </BoldText>
-            <Text>{info?.box_1?.subtitle}</Text>
-          </StyledCountCard>
-          <StyledCountCard>
-            <StyledCountUp ref={countRef}>
-              <CountUpAnimation
-                initialValue={initialCountValue}
-                isCounting={isInView}
-              >
-                {info?.box_2?.count_up_value}
-              </CountUpAnimation>
-              +
-            </StyledCountUp>
-            <Text>{info?.box_2?.subtitle} </Text>
-          </StyledCountCard>
-          <StyledCountCard>
-            <BoldText>
-              <Subheader>{info?.box_3?.title}</Subheader>
-            </BoldText>
-            <Text>{info?.box_3?.subtitle}</Text>
-          </StyledCountCard>
-          <StyledCountCard>
-            <BoldText>
-              <Subheader>{info?.box_4?.title}</Subheader>
-            </BoldText>
-            <Text>{info?.box_4?.subtitle}</Text>
-          </StyledCountCard>
+        <StyledCardContainer ref={countRef}>
+          {buildWrapper(info?.box_1)}
+          {buildWrapper(info?.box_2)}
+          {buildWrapper(info?.box_3)}
+          {buildWrapper(info?.box_4)}
         </StyledCardContainer>
       </StyledImageOverlay>
     </StyledContainer>

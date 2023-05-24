@@ -99,6 +99,7 @@ const StyledLinkColumn = styled.div`
 const StyledLinkHeader = styled.div`
   font-weight: bold;
   margin-bottom: 14px;
+  font-family: CERA;
 `;
 const StyledLink = styled.div`
   margin-bottom: 8px;
@@ -207,9 +208,10 @@ export const Footer = React.memo(props => {
               </StyledInputContainer>
               <StyledButtonContainer>
                 <Button
-                  color={"#3ECF8E"}
+                  color={colors.success}
                   fontColor={"white"}
                   onClick={handleButtonClick}
+                  hoverColor={colors.successDark}
                 >
                   Submit
                 </Button>

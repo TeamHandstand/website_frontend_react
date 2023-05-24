@@ -8,15 +8,16 @@ const StyledContainer = styled.button`
   color: ${props => props.color};
   font-weight: bold;
   opacity: 1;
-  transition: opacity 0.3s;
+  transition: 0.3s;
   border-radius: 6px;
   border: none;
   &:hover {
+    background-color: ${props => props.hoverColor};
   }
   cursor: pointer;
 `;
 export const Button = React.memo(props => {
-  const { color, fontColor, onClick = () => {} } = props;
+  const { color, fontColor, onClick = () => {}, hoverColor } = props;
   const handleClick = () => {
     onClick();
   };
@@ -28,6 +29,7 @@ export const Button = React.memo(props => {
       color={fontColor}
       backgroundColor={color}
       onClick={handleClick}
+      hoverColor={hoverColor}
     >
       {children}
     </StyledContainer>

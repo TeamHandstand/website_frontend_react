@@ -3,19 +3,23 @@ import styled from "styled-components";
 import { colors } from "../../styles.js/colors";
 import { Header } from "../text/Header";
 import { Subheader } from "../text/Subheader";
+import { breakpoints } from "../../styles.js/breakpoints";
 const StyledImageContainer = styled.div`
   position: absolute;
   height: 100%;
   top: 0;
   opacity: ${props => props.opacity};
   transition: 0.2s;
+  @media (min-width: ${breakpoints.hero}px) {
+    width: 100%;
+  }
 `;
 const StyledHazeContainer = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: rgba(0, 0, 0, 0.5);
   opacity: ${props => props.opacity};
   transition: 0.2s;
 `;
@@ -53,6 +57,9 @@ const StyledSubheader = styled.div`
 const StyledImage = styled.video`
   flex-shrink: 0;
   min-height: 100%;
+  @media (min-width: ${breakpoints.hero}px) {
+    width: 100%;
+  }
 `;
 
 export const HeroBackground = React.memo(props => {

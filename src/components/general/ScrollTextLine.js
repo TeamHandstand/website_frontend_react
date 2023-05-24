@@ -2,11 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { isInViewport } from "../../helpers/isInViewport";
 import { getRandomInteger } from "../../helpers/getRandomInteger";
+import { colors } from "../../styles.js/colors";
 const StyledContainer = styled.div`
   position: relative;
 `;
 const StyledText = styled.div`
-  color: grey;
+  color: ${colors.scrollTextLight};
   background-color: white;
   z-index: 1;
 `;

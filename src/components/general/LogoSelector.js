@@ -25,7 +25,8 @@ export const LogoSelector = React.memo(props => {
     testimonials,
     onLogoClick,
     selectedTestimonial,
-    animationTime
+    animationTime,
+    isPaused
   } = props;
 
   const handleLogoClick = testimonial => {
@@ -41,6 +42,7 @@ export const LogoSelector = React.memo(props => {
               testimonial={testimonial}
               onLogoClick={() => handleLogoClick(testimonial)}
               animationTime={animationTime}
+              isPaused={isPaused}
             />
             {index !== testimonials?.length - 1 && <StyledDivider />}
           </LogoContainer>
