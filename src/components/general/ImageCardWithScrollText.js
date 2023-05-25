@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { ScrollText } from "./ScrollText";
 import { Header } from "../text/Header";
 import { Subheader } from "../text/Subheader";
-import { breakpoints } from "../../styles.js/breakpoints";
+import { breakpoints } from "../../styles/breakpoints";
+import { paddings } from "../../styles/paddings";
 const StyledContainer = styled.div`
   position: relative;
   border-radius: 13px;
@@ -11,14 +12,14 @@ const StyledContainer = styled.div`
   background-color: white;
   overflow: hidden;
   height: 90vh;
+  @media (max-width: ${breakpoints.medium}px) {
+    height: auto;
+  }
 `;
 const StyledImageContainer = styled.div`
   width: 100%;
   position: relative;
-  padding: 6px 0px 6px 0px;
-  @media (min-width: ${breakpoints.extraLarge}px) {
-    padding: 50px 0px 20px 0px;
-  }
+  padding: ${paddings.y}px 0px;
 `;
 //   background: linear-gradient(
 //     to bottom,
@@ -29,18 +30,23 @@ const StyledImageContainer = styled.div`
 //   );
 const StyledImage = styled.img`
   width: 100%;
+  object-fit: cover;
+  max-height: 64vh;
 `;
 const StyledTitle = styled.div`
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: ${paddings.y}px;
+  left: ${paddings.x}px;
   font-size: 48px;
   font-weight: bold;
   width: 100%;
   z-index: 2;
 `;
 const StyledScrollText = styled.div`
-  padding: 2px 8px;
+  padding: 2px 0px 2px ${paddings.x}px;
+  @media (max-width: ${breakpoints.medium}px) {
+    padding-bottom: ${paddings.y}px;
+  }
 `;
 
 const StyledContainerMask = styled.div`
@@ -63,11 +69,12 @@ export const ImageCardWithScrollText = React.memo(props => {
   const { imageUrl, title, linesOfDescription } = props;
   return (
     <StyledContainer>
-      <StyledContainerMask />
       <StyledTitle>
         <Header>{title}</Header>
       </StyledTitle>
       <StyledImageContainer>
+        <StyledContainerMask />
+
         <StyledImage src={imageUrl} />
       </StyledImageContainer>
       <StyledScrollText>

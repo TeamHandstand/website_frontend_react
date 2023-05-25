@@ -3,13 +3,14 @@ import styled from "styled-components";
 import { Header } from "../text/Header";
 import { ScrollText } from "../general/ScrollText";
 import { TestimonialWidget } from "../general/TestimonialWidget";
-import { breakpoints } from "../../styles.js/breakpoints";
+import { breakpoints } from "../../styles/breakpoints";
 import { Subheader } from "../text/Subheader";
+import { paddings } from "../../styles/paddings";
 const StyledContainer = styled.div`
   width: 80%;
   background-color: white;
   border-radius: 13px;
-  padding: 30px 8px 8px 8px;
+  padding: ${paddings.y}px 8px 8px 8px;
   margin-top: 40px;
   transition: 0.3s;
   @media (max-width: ${breakpoints.medium}px) {
@@ -35,6 +36,24 @@ const StyledText = styled.div`
 `;
 export const TestimonialCard = React.memo(props => {
   const { jsonData } = props;
+  let linesOfDescription = [];
+  const desktopLines = [
+    "We've worked with hundreds of companies around the world.",
+    "Here are a few partners and their unique stories."
+  ];
+  const mobileLines = [
+    "We've worked with hundreds",
+    "of companies around the world.",
+    "Here are a few partners",
+    "and their unique stories."
+  ];
+  React.useEffect(() => {
+    if (window?.innerWidth <= breakpoints.medium) {
+      linesOfDescription = mobileLines;
+    } else {
+      linesOfDescription = desktopLines;
+    }
+  }, []);
   return (
     <StyledContainer>
       <StyledText>
@@ -43,12 +62,7 @@ export const TestimonialCard = React.memo(props => {
         </StyledHeader>
         <StyledTextContainer>
           <Subheader>
-            <ScrollText
-              linesOfDescription={[
-                "We've worked with hundreds of companies around the world.",
-                "Here are a few partners and their unique stories."
-              ]}
-            />
+            <ScrollText linesOfDescription={linesOfDescription} />
           </Subheader>
         </StyledTextContainer>
       </StyledText>

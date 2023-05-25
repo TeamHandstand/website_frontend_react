@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { breakpoints } from "../../styles/breakpoints";
+
 const StyledContainer = styled.div`
   width: 100%;
   display: flex;
@@ -9,6 +11,9 @@ const StyledContainer = styled.div`
   cursor: pointer;
   position: relative;
   height: 76px;
+  @media (max-width: ${breakpoints.medium}px) {
+    height: auto;
+  }
 `;
 const StyledLogo = styled.img`
   width: 100%;
@@ -18,6 +23,9 @@ const StyledLogo = styled.img`
   filter: ${props => (props.isSelected ? "grayscale(0)" : "grayscale(100)")};
   transition: 2s;
   padding: 8px 12px;
+  @media (max-width: ${breakpoints.medium}px) {
+    display: none;
+  }
 `;
 const StyledLoadingBarContainer = styled.div`
   width: 100%;

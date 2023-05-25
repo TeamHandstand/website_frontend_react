@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Header } from "../text/Header";
 import { Text } from "../text/Text";
 import { Subheader } from "../text/Subheader";
-import { breakpoints } from "../../styles.js/breakpoints";
+import { breakpoints } from "../../styles/breakpoints";
+import { paddings } from "../../styles/paddings";
 import { isInViewport } from "../../helpers/isInViewport";
 import { CountUpAnimation } from "../general/CountUpAnimation";
 const StyledContainer = styled.div`
@@ -12,6 +13,13 @@ const StyledContainer = styled.div`
 `;
 const StyledImage = styled.img`
   width: 100%;
+  border-radius: 13px;
+  @media (max-width: ${breakpoints.medium}px) {
+    width: 200%;
+    overflow: hidden;
+    object-fit: cover;
+    height: 100%;
+  }
 `;
 const StyledImageOverlay = styled.div`
   position: absolute;
@@ -28,6 +36,10 @@ const StyledTextContainer = styled.div`
   width: 100%;
   color: white;
   text-align: center;
+  padding-top: ${paddings.y}px;
+  @media (max-width: ${breakpoints.medium}px) {
+    padding: ${paddings.x}px;
+  }
 `;
 
 const StyledHeader = styled.div`
@@ -53,6 +65,10 @@ const StyledCardContainer = styled.div`
   padding: 8px;
   max-width: 1000px;
   margin-bottom: 20px;
+  @media (max-width: ${breakpoints.medium}px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 const StyledCountCard = styled.div`
   width: 24%;
@@ -68,7 +84,9 @@ const StyledCountCard = styled.div`
   border-radius: 13px;
   text-align: left;
   @media (max-width: ${breakpoints.medium}px) {
-    height: 100px;
+    height: 150px;
+    width: 150px;
+    margin: 5px;
   }
 `;
 

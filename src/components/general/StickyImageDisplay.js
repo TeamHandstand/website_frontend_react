@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { ImageCardWithDescription } from "./ImageCardWithDescription";
 import { ImageCardWithScrollText } from "./ImageCardWithScrollText";
-import { breakpoints } from "../../styles.js/breakpoints";
+import { breakpoints } from "../../styles/breakpoints";
 const StyledContainer = styled.div`
   position: relative;
   display: flex;

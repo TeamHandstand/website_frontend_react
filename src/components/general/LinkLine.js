@@ -4,7 +4,7 @@ import { Subheader } from "../text/Subheader";
 import { Text } from "../text/Text";
 import { LottieArrow } from "./LottieArrow";
 import { CustomLink } from "./CustomLink";
-import { colors } from "../../styles.js/colors";
+import { colors } from "../../styles/colors";
 const StyledContainer = styled.div`
   display: flex;
   justify-content: space-between;

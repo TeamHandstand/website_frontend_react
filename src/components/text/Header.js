@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { breakpoints } from "../../styles.js/breakpoints";
+import { breakpoints } from "../../styles/breakpoints";
 const StyledContainer = styled.div`
   font-size: 70px;
   font-weight: bold;

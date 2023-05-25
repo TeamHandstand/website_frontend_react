@@ -8,7 +8,7 @@ import peopleIcon from "../../images/icons/case-study-icon-people.svg";
 import { distanceBetweenIndices } from "../../helpers/distanceBetweenIndices";
 import { LottieArrow } from "./LottieArrow";
 import { Transition } from "react-transition-group";
-import { breakpoints } from "../../styles.js/breakpoints";
+import { breakpoints } from "../../styles/breakpoints";
 import { Subheader } from "../text/Subheader";
 
 const containerWidth = 1000;
@@ -36,11 +36,18 @@ const StyledImageTitle = styled.img`
   width: auto;
   max-height: 65px;
   filter: brightness(0) invert(1);
+  @media (max-width: ${breakpoints.medium}px) {
+    max-height: 48px;
+  }
 `;
 const StyledImage = styled.img`
   width: ${props => 100 / props.numTestimonials}%;
   opacity: 1;
   transition: opacity 1s;
+  @media (max-width: ${breakpoints.medium}px) {
+    min-height: 469px;
+    object-fit: cover;
+  }
 `;
 const StyledImageCaption = styled.div`
   position: absolute;

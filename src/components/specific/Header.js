@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { HeaderQuoteButton } from "./HeaderQuoteButton";
 import { CustomLink } from "../general/CustomLink";
 import logo from "../../images/logos/logo-handstand-header.svg";
-import { breakpoints } from "../../styles.js/breakpoints";
+import { breakpoints } from "../../styles/breakpoints";
 import { MaxWidthContainer } from "../general/MaxWidthContainer";
 
 // TODO: use a 1s transition of background-color and font color when scrolled past the threshold.

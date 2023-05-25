@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { isInViewport } from "../../helpers/isInViewport";
 import { getRandomInteger } from "../../helpers/getRandomInteger";
-import { colors } from "../../styles.js/colors";
+import { colors } from "../../styles/colors";
 const StyledContainer = styled.div`
   position: relative;
 `;
@@ -63,7 +63,7 @@ export const ScrollTextLine = React.memo(props => {
     if (currentScrollTop > scrollRef.current) {
       // scrolled down
       const newWidth = Math.min(
-        Number(widthRef.current + getRandomInteger({ min: 5, max: 25 })),
+        Number(widthRef.current + getRandomInteger({ min: 5, max: 20 })),
         textRef?.current?.offsetWidth
       );
       setWidthRef(newWidth);
@@ -73,7 +73,7 @@ export const ScrollTextLine = React.memo(props => {
       //   scrolled up
       const newWidth = Math.max(
         0,
-        Number(widthRef.current - getRandomInteger({ min: 5, max: 25 }))
+        Number(widthRef.current - getRandomInteger({ min: 5, max: 20 }))
       );
       setWidthRef(newWidth);
     }

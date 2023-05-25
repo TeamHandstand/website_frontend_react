@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import { CustomLink } from "../general/CustomLink";
-import { colors } from "../../styles.js/colors";
+import { colors } from "../../styles/colors";
 import { Input } from "../general/Input";
 import { Button } from "../general/Button";
-import { breakpoints } from "../../styles.js/breakpoints";
+import { breakpoints } from "../../styles/breakpoints";
 import logo from "../../images/logos/handstand-footer-logo.svg";
 import { MaxWidthContainer } from "../general/MaxWidthContainer";
 const StyledContainer = styled.div`

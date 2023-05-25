@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { CustomLink } from "../general/CustomLink";
-import { colors } from "../../styles.js/colors";
+import { colors } from "../../styles/colors";
 const StyledContainer = styled.button`
   padding: 8px;
   width: 160px;

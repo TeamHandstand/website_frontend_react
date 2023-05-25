@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { LogoWithLoadingBar } from "./LogoWithLoadingBar";
-import { colors } from "../../styles.js/colors";
+import { colors } from "../../styles/colors";
+import { breakpoints } from "../../styles/breakpoints";
 const StyledContainer = styled.div`
   width: 100%;
   display: flex;
@@ -19,6 +20,9 @@ const StyledDivider = styled.div`
   width: 2px;
   height: 85%;
   background-color: ${colors.lightGrey};
+  @media (max-width: ${breakpoints.medium}px) {
+    display: none;
+  }
 `;
 export const LogoSelector = React.memo(props => {
   const {

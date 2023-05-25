@@ -9,8 +9,8 @@ import { CountCard } from "../specific/CountCard";
 import { Footer } from "../specific/Footer";
 
 import { HeroBackground } from "../general/HeroBackground";
-import { colors } from "../../styles.js/colors";
-import { breakpoints } from "../../styles.js/breakpoints";
+import { colors } from "../../styles/colors";
+import { breakpoints } from "../../styles/breakpoints";
 import { MaxWidthContainer } from "../general/MaxWidthContainer";
 
 const StyledContainer = styled.div`

@@ -2,9 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { Header } from "../text/Header";
 import { LinkLine } from "./LinkLine";
-import { breakpoints } from "../../styles.js/breakpoints";
+import { breakpoints } from "../../styles/breakpoints";
+import { paddings } from "../../styles/paddings";
 const StyledContainer = styled.div`
-  padding: 30px;
+  padding: ${paddings.x}px;
   background-color: white;
   width: 80%;
   border-radius: 13px;
